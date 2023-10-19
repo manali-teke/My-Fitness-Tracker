@@ -57,6 +57,7 @@ def login():
             email = session.get('email')
             temp = mongo.user.find_one({'email': form.email.data}, {
                 'email', 'pwd','name'})
+            print("temp value is here", temp)
             if temp is not None and temp['email'] == form.email.data and (
                 bcrypt.checkpw(
                     form.password.data.encode("utf-8"),
