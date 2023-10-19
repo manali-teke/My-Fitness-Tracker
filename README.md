@@ -150,9 +150,10 @@ Link to the implementation video of the BurnOut application:
  # Steps for execution
  
  Step 1:
- Install MongoDB using the following link:
+ Run a local instance of mongoDb via docker or host a free tier one on cloud, add the connection string in flaskenv file.
  
- https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows
+ docker pull mongo && 
+ docker run -d mongo
  
  Step 2: 
   Git Clone the Repository 
@@ -164,24 +165,24 @@ Link to the implementation video of the BurnOut application:
     https://github.com/deekay2310/calorieApp_server.git
   
  Step 3:
-   Install the required packages by running the following command in the terminal 
+   Build the docker image locally.
    
-    pip install -r requirements.txt
+    docker build -t <image-name> .
     
  Step 4:
     Run the following command in the terminal
     
-    python application.py
+    docker run <image-name> -dp <host-port>:3000 
     
  Step 5:
     Open the URL in your browser:  
-      http://127.0.0.1:5000/
+      http://127.0.0.1:host-port/
       
       
   # Source Code
   
   Link to the repository:
-  https://github.com/deekay2310/calorieApp_server
+  https://github.com/chaithanyaMarripati/calorieApp_server
   
   # Enhancements
 
