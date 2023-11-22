@@ -9,11 +9,11 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![Build Status](https://app.travis-ci.com/atharva1996/calorieApp_server.svg?branch=main)](https://app.travis-ci.com/atharva1996/calorieApp_server)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/chaithanyaMarripati/calorieApp_server/main)
-![total lines](https://img.shields.io/tokei/lines/github/chaithanyaMarripati/calorieApp_server)
-![github workflow](https://github.com/chaithanyaMarripati/calorieApp_server/actions/workflows/unit_test.yml/badge.svg)
-![github workflow](https://github.com/chaithanyaMarripati/calorieApp_server/actions/workflows/style_checker.yml/badge.svg)
-![github workflow](https://github.com/chaithanyaMarripati/calorieApp_server/actions/workflows/syntax_checker.yml/badge.svg)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/manali-teke/My-Fitness-Tracker/main)
+![total lines](https://img.shields.io/tokei/lines/github/manali-teke/My-Fitness-Tracker)
+![github workflow](https://github.com/manali-teke/My-Fitness-Tracker/actions/workflows/unit_test.yml/badge.svg)
+![github workflow](https://github.com/manali-teke/My-Fitness-Tracker/actions/workflows/style_checker.yml/badge.svg)
+![github workflow](https://github.com/manali-teke/My-Fitness-Tracker/actions/workflows/syntax_checker.yml/badge.svg)
 [![codecov](https://codecov.io/gh/chaithanyaMarripati/calorieApp_server/branch/main/graph/badge.svg?token=IQW5PLLE22)](https://codecov.io/gh/deekay2310/calorieApp_server)
 <!--Badges-->
 <a href="https://github.com/chaithanyaMarripati/calorieApp_server/fork" target="blank">
