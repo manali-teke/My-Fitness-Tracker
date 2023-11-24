@@ -57,7 +57,7 @@ class CalorieForm(FlaskForm):
     result = []
     temp = ""
     for i in get_docs:
-        print(i)
+        #print(i)
         temp = i['Food'] + ' (' + i['Calories'] + ')'
         result.append((temp, temp))
 

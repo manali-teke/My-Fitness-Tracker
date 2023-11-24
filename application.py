@@ -144,12 +144,12 @@ def calories():
     """
     now = datetime.now()
     now = now.strftime('%Y-%m-%d')
-    form = CalorieForm()
+    calorieForm = CalorieForm()
     get_session = session.get('email')
     if get_session is not None:
         
-        if form.validate_on_submit():
-            print(form,"this is the form")
+        if calorieForm.validate_on_submit():
+            print(calorieForm,"this is the form")
             print(request,"this is the request ")
             if request.method == 'POST':
                 email = session.get('email')
@@ -171,10 +171,12 @@ def calories():
                 # else:
                 mongo.calories.insert( {'date': date, 'email': email, 'calories': cals, 'burnout': int(burn)})
                 flash(f'Successfully updated the data', 'success')
-                return redirect(url_for('calories'))
+                #return render_template('tracker.html', title = 'Calories', form=calorieForm, time=now)
+                
     else:
-        return redirect(url_for('home'))
-    return render_template('calories.html', title = 'Calories', form=form, time=now)
+        flash(f'Failed to insert the data', 'failure')
+    return redirect(url_for('tracker'))
+    #return render_template('calories.html', title = 'Calories', form=calorieForm, time=now)
 
 
 @app.route("/user_profile", methods=['GET', 'POST'])
@@ -228,8 +230,8 @@ def history():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = HistoryForm()
-    return render_template('history.html', form=form)
+        historyForm = HistoryForm()
+    return render_template('history.html', form=historyForm)
 
 
 @app.route("/ajaxhistory", methods=['POST'])
@@ -246,10 +248,17 @@ def ajaxhistory():
     if get_session is not None:
         if request.method == "POST":
             date = request.form.get('date')
-            res = mongo.calories.find_one({'email': email, 'date': date}, {
+            res = mongo.calories.find({'email': email, 'date': date}, {
                                              'date', 'email', 'calories', 'burnout'})
+            calorie_list = list(res)
+            total_calories = 0
+            total_burnout = 0
+            for item in calorie_list:
+                total_calories += item["calories"]
+                total_burnout += item["burnout"]
+
             if res:
-                return json.dumps({'date': res['date'], 'email': res['email'], 'burnout': res['burnout'], 'calories': res['calories']}), 200, {
+                return json.dumps({'date': date, 'email': email, 'burnout': total_burnout, 'calories': total_calories}), 200, {
                     'ContentType': 'application/json'}
             else:
                 return json.dumps({'date': "", 'email': "", 'burnout': "", 'calories': ""}), 200, {
@@ -437,7 +446,7 @@ def dashboard():
     return render_template('dashboard.html', title='Dashboard')
 def fetch():
     email = session.get('email')
-    return list(mongo.user.find({'Email': email},{'Status'}))
+    return list(mongo.enrollment.find({'Email': email},{'Exercise'}))
 
 @app.route("/yoga", methods=['GET', 'POST'])
 def yoga():
@@ -453,20 +462,8 @@ def yoga():
         form = EnrollForm()
         if form.validate_on_submit():
             if request.method == 'POST':
-                enroll = "yoga"
-                status = mongo.user.find_one({'Email': email, 'Status': enroll},{'Email','Status'})
-                print(status)
-                if status:
-                    flash(
-                        f'You have already enrolled in our {enroll} plan!','warning')
-                else:
-                    mongo.user.insert({'Email': email, 'Status': enroll})
-                    flash(
-                        f' You have succesfully enrolled in our {enroll} plan!',
-                        'success')
-            data = fetch()
-            return render_template('new_dashboard.html', data = data, form=form)
-            # return redirect(url_for('dashboard'))
+                enroll(email,"yoga")
+            return redirect(url_for('new_dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('yoga.html', title='Yoga', form=form)
@@ -486,19 +483,8 @@ def swim():
         form = EnrollForm()
         if form.validate_on_submit():
             if request.method == 'POST':
-                enroll = "swimming"
-                status = mongo.user.find_one({'Email': email, 'Status': enroll},{'Email','Status'})
-                if status:
-                    flash(
-                        f'You have already enrolled in our {enroll} plan!','warning')
-                else:
-                    mongo.user.insert({'Email': email, 'Status': enroll})
-                    flash(
-                        f' You have succesfully enrolled in our {enroll} plan!',
-                        'success')
-            data = fetch()
-            return render_template('new_dashboard.html', data = data, form=form)
-            # return redirect(url_for('dashboard'))
+                enroll(email,"swimming")
+            return redirect(url_for('new_dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('swim.html', title='Swim', form=form)
@@ -518,18 +504,8 @@ def abbs():
         form = EnrollForm()
         if form.validate_on_submit():
             if request.method == 'POST':
-                enroll = "abbs"
-                status = mongo.user.find_one({'Email': email, 'Status': enroll},{'Email','Status'})
-                if status:
-                    flash(
-                        f'You have already enrolled in our {enroll} plan!','warning')
-                else:
-                    mongo.user.insert({'Email': email, 'Status': enroll})
-                    flash(
-                        f' You have succesfully enrolled in our {enroll} plan!',
-                        'success')
-            data = fetch()
-            return render_template('new_dashboard.html', data = data, form=form)
+                enroll(email,"abbs")            
+            return redirect(url_for('new_dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('abbs.html', title='Abbs Smash!', form=form)
@@ -549,18 +525,8 @@ def belly():
         form = EnrollForm()
         if form.validate_on_submit():
             if request.method == 'POST':
-                enroll = "belly"
-                status = mongo.user.find_one({'Email': email, 'Status': enroll},{'Email','Status'})
-                if status:
-                    flash(
-                        f'You have already enrolled in our {enroll} plan!','warning')
-                else:
-                    mongo.user.insert({'Email': email, 'Status': enroll})
-                    flash(
-                        f' You have succesfully enrolled in our {enroll} plan!',
-                        'success')
-            data = fetch()
-            return render_template('new_dashboard.html', data = data, form=form)
+                enroll(email,"belly")            
+            return redirect(url_for('new_dashboard'))
             # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
@@ -581,18 +547,8 @@ def core():
         form = EnrollForm()
         if form.validate_on_submit():
             if request.method == 'POST':
-                enroll = "core"
-                status = mongo.user.find_one({'Email': email, 'Status': enroll},{'Email','Status'})
-                if status:
-                    flash(
-                        f'You have already enrolled in our {enroll} plan!','warning')
-                else:
-                    mongo.user.insert({'Email': email, 'Status': enroll})
-                    flash(
-                        f' You have succesfully enrolled in our {enroll} plan!',
-                        'success')
-            data = fetch()
-            return render_template('new_dashboard.html', data = data, form=form)
+                enroll(email,"core")
+            return redirect(url_for('new_dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('core.html', title='Core Conditioning', form=form)
@@ -612,18 +568,8 @@ def gym():
         form = EnrollForm()
         if form.validate_on_submit():
             if request.method == 'POST':
-                enroll = "gym"
-                status = mongo.user.find_one({'Email': email, 'Status': enroll},{'Email','Status'})
-                if status:
-                    flash(
-                        f'You have already enrolled in our {enroll} plan!','warning')
-                else:
-                    mongo.user.insert({'Email': email, 'Status': enroll})
-                    flash(
-                        f' You have succesfully enrolled in our {enroll} plan!',
-                        'success')
-            data = fetch()
-            return render_template('new_dashboard.html', data = data, form=form)
+                enroll(email,"gym")
+            return redirect(url_for('new_dashboard'))
             # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
@@ -643,22 +589,26 @@ def walk():
         form = EnrollForm()
         if form.validate_on_submit():
             if request.method == 'POST':
-                enroll = "walk"
-                status = mongo.user.find_one({'Email': email, 'Status': enroll},{'Email','Status'})
-                if status:
-                    flash(
-                        f'You have already enrolled in our {enroll} plan!','warning')
-                else:
-                    mongo.user.insert({'Email': email, 'Status': enroll})
-                    flash(
-                        f' You have succesfully enrolled in our {enroll} plan!',
-                        'success')
-            data = fetch()
-            return render_template('new_dashboard.html', data = data, form=form)
-            # return redirect(url_for('dashboard'))
+                enroll(email, "walk")                
+            return redirect(url_for('new_dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('walk.html', title='Walk', form=form)
+
+def enroll(user_email, exercise_type):
+    #try:
+        #mongo.validate_collection("enrollment")
+    #except mongo.errors.OperationFailure:
+        #mongo["enrollment"]
+    status = mongo.enrollment.find_one({'Email': user_email, 'Exercise': exercise_type, 'Active':True},{'Email','Exercise'})
+    if status:
+        flash(
+            f'You have already enrolled in our {exercise_type} plan!','warning')
+    else:
+        mongo.enrollment.insert({'Email': user_email, 'Exercise': exercise_type, 'Active': True})
+        flash(
+            f' You have succesfully enrolled in our {exercise_type} plan!',
+            'success')
 
 @app.route("/dance", methods=['GET', 'POST'])
 def dance():
@@ -674,19 +624,8 @@ def dance():
         form = EnrollForm()
         if form.validate_on_submit():
             if request.method == 'POST':
-                enroll = "dance"
-                status = mongo.user.find_one({'Email': email, 'Status': enroll},{'Email','Status'})
-                if status:
-                    flash(
-                        f'You have already enrolled in our {enroll} plan!','warning')
-                else:
-                    mongo.user.insert({'Email': email, 'Status': enroll})
-                    flash(
-                        f' You have succesfully enrolled in our {enroll} plan!',
-                        'success')
-            data = fetch()
-            return render_template('new_dashboard.html', data = data, form=form)
-            # return redirect(url_for('dashboard'))
+                enroll(email, "dance")
+            return redirect(url_for('new_dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('dance.html', title='Dance', form=form)
@@ -705,19 +644,8 @@ def hrx():
         form = EnrollForm()
         if form.validate_on_submit():
             if request.method == 'POST':
-                enroll = "hrx"
-                status = mongo.user.find_one({'Email': email, 'Status': enroll},{'Email','Status'})
-                if status:
-                    flash(
-                        f'You have already enrolled in our {enroll} plan!','warning')
-                else:
-                    mongo.user.insert({'Email': email, 'Status': enroll})
-                    flash(
-                        f' You have succesfully enrolled in our {enroll} plan!',
-                        'success')
-            data = fetch()
-            return render_template('new_dashboard.html', data = data, form=form)
-            # return redirect(url_for('dashboard'))
+                enroll(email,"hrx")
+            return redirect(url_for('new_dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('hrx.html', title='HRX', form=form)
@@ -748,7 +676,6 @@ def hrx():
 @app.route('/workout_suggestions', methods=['GET','POST'])
 def workout_suggestions():
     email = session.get('email')
-
     # Assuming you have already created a MongoClient and connected to the database
     # client = MongoClient("mongodb://localhost:27017")
     # db = client["your_database_name"]
@@ -821,9 +748,21 @@ def workout_suggestions():
         suggestions.append("Exercise 3: Jump Rope - 30 minutes")
         # Suggested diet: Continue maintaining a calorie deficit.
 
-    suggestions.append("You must maintain the workout to achive your taget")
+    suggestions.append("You must maintain the workout to achieve your target")
 
-    return render_template('suggestion.html', title='Suggestion',status=True, data = suggestions)
+    return render_template('suggestions.html', title='Suggestion',status=True, data = suggestions)
+
+@app.route('/tracker', methods=['GET','POST'])
+def tracker():
+    email = session.get('email')
+    historyForm = HistoryForm()
+    calorieForm = CalorieForm()
+    return render_template('tracker.html', title='Health Tracker',status=True, historyForm = historyForm, calorieForm = calorieForm)
+
+@app.route('/new_dashboard', methods=['GET','POST'])
+def new_dashboard():
+    data = fetch()
+    return render_template('new_dashboard.html', data = data)
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0",port=3000)

@@ -2,18 +2,23 @@
 {% block content %}
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Your Profile</title>
     <style>
         /* Define custom styles for nav-button */
         .nav-button {
-            border-color: #0dcaf0; /* Set the border color to blue */
-            color: #0dcaf0; /* Set the text color to blue */
-            border-radius: 0.25rem; /* Rounded border edges */
+            border-color: #0dcaf0;
+            /* Set the border color to blue */
+            color: #0dcaf0;
+            /* Set the text color to blue */
+            border-radius: 0.25rem;
+            /* Rounded border edges */
         }
     </style>
 </head>
+
 <body>
     <h1>Your Profile</h1>
 </body>
@@ -50,11 +55,12 @@
         </div>
     </div>
 </section>
-<center>
-    <button class="nav-button">
-        <a href="{{ url_for('user_profile') }}">Edit</a>
-    </button>
-</center>
+<div class="container">
+    <div class="profile-btn-div">
+        <a href="{{ url_for('user_profile') }}" role="button" class="btn btn-lg btn-more-info">Edit</a>
+    </div>
+</div>
 <br><br>
+
 </html>
 {% endblock content %}

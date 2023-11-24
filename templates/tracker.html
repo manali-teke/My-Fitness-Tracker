@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <div class="row">
+
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12 p-3 mb-3 ml-4 border border-secondary rounded">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <form method="POST" name='calorieform' action="/calories">
+                    <!-- Include hidden fields for form data -->
+                    {{ calorieForm.hidden_tag() }}
+
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Enter Calories</legend>
+
+                        <div class="form-group">
+                            <label class="form-control-label">Date</label>
+                            <!-- Input field for date, required -->
+                            <input type="date" name="date" required>
+                        </div>
+
+                        <div class="form-group">
+                            {{ calorieForm.food.label(class="form-control-label") }}
+                            {{ calorieForm.food(class="form-control form-control-lg") }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ calorieForm.burnout.label(class="form-control-label") }}
+                            {{ calorieForm.burnout(class="form-control form-control-lg") }}
+                        </div>
+                    </fieldset>
+
+                    <div class="form-group">
+                        <!-- Submit button for the form -->
+                        {{ calorieForm.submit(class="btn btn-outline-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-12 col-xs-12 mb-3 p-3 ml-4 border border-secondary rounded">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <form method="POST" onSubmit="event.preventDefault(); return history(event)" name='historyForm'
+                        action="/history">
+                        {{ historyForm.hidden_tag() }}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4">History</legend>
+                            <div class="form-group">
+                                <label class="form-control-label">Date</label>
+                                <input type="date" name="date" required>
+                            </div>
+                        </fieldset>
+                        <div class="form-group">
+                            {{ historyForm.submit(class="btn btn-outline-primary") }}
+
+                        </div>
+                    </form>
+                </div>
+                <!-- <div id="history-data card" class="col-md-12 col-sm-12 col-xs-12">
+                <h5 class="card-header">History</h5>
+                <div class="card-body">
+                    <p class="border-bottom mb-4 h6" id="date_legend"></p>
+                    <p class="card-text" id="date"></p> <br>
+                    <p class="border-bottom mb-4 h6" id="calories_legend"></p>
+                    <p class="card-text" id="calories"></p> <br>
+                    <p class="border-bottom mb-4 h6" id="burnout_legend"></p>
+                    <p class="card-text" id="burnout"></p> <br>
+                </div>
+            </div> -->
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Calories</th>
+                                <th scope="col">Burnout</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablebody">  
+                            <tr>
+                                <td id="date"></td>
+                                <td id="calories"></td>
+                                <td id="burnout2"></td>
+                            </tr>                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
