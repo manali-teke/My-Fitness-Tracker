@@ -1,5 +1,9 @@
 from datetime import datetime
 
+import plotly.express as px
+import plotly.graph_objects as go
+from bson import ObjectId
+
 import bcrypt
 import smtplib
 
@@ -102,10 +106,53 @@ def display_profile():
     Input: Email, height, weight, goal, Target weight
     Output: Value update in database and redirected to home login page
     """
+    now = datetime.now()
+    now = now.strftime('%Y-%m-%d')
+
     if session.get('email'):
         email = session.get('email')
-        data = mongo.profile.find_one({'email': email}, {'weight', 'height', 'target_weight'})
-        return render_template('display_profile.html', title = 'Profile', data=data, status=True)
+        #data = mongo.profile.find_one({'email': email}, {'weight', 'height', 'target_weight'})
+
+        user_data = mongo.profile.find_one({'email': email})
+        target_weight=float(user_data['target_weight'])
+        user_data_hist = list(mongo.profile.find({'email': email}))
+        print(user_data_hist)
+        if user_data_hist:
+                for entry in user_data_hist:
+                    entry['date'] = datetime.strptime(entry['date'], '%Y-%m-%d').date()
+
+                sorted_user_data_hist = sorted(user_data_hist, key=lambda x: x['date'])
+                dates = [entry['date'] for entry in sorted_user_data_hist]
+                weights = [float(entry['weight']) for entry in sorted_user_data_hist]
+
+                print("Dates:", dates)  # Debugging statement
+                print("Weights:", weights) 
+                fig = go.Figure()
+
+                fig.add_trace(go.Scatter(x=dates, y=weights, mode='lines+markers', name='Weight Progress'))
+                fig.add_trace(go.Scatter(x=dates, y=[target_weight] * len(dates), mode='lines', line=dict(color='green', width=1, dash='dot'), name='Target Weight'))
+
+                fig.update_layout(
+                    title='Weight Progress Over Time',
+                    xaxis=dict(title='Date'),
+                    yaxis=dict(title='Weight'),
+                    showlegend=True,
+                )
+
+                fig.update_yaxes(range=[min(min(weights), target_weight) - 5, max(max(weights), target_weight) + 5])
+                fig.update_xaxes(range=[min(dates), now])
+
+                # Converting to JSON
+                graph_html = fig.to_html(full_html=False)
+
+                last_10_entries = sorted_user_data_hist[-10:]
+                return render_template('display_profile.html', status=True, user_data=user_data, graph_html=graph_html, last_10_entries=last_10_entries)
+        else:
+            flash(f'no 10 entries')
+            return redirect(url_for('home'))
+    else:
+        return redirect(url_for('login'))
+        #return render_template('display_profile.html', title = 'Profile', data=data, status=True)
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -117,6 +164,9 @@ def register():
     Input: Username, Email, Password, Confirm Password
     Output: Value update in database and redirected to home login page
     """
+    now = datetime.now()
+    now = now.strftime('%Y-%m-%d')
+
     if not session.get('email'):
         form = RegistrationForm()
         if form.validate_on_submit():
@@ -124,8 +174,20 @@ def register():
                 username = request.form.get('username')
                 email = request.form.get('email')
                 password = request.form.get('password')
-                mongo.user.insert_one({'name': username, 'email': email, 'pwd': bcrypt.hashpw(
+                mongo.user.insert({'name': username, 'email': email, 'pwd': bcrypt.hashpw(
                     password.encode("utf-8"), bcrypt.gensalt())})
+            
+                weight = request.form.get('weight')
+                height = request.form.get('height')
+                goal = request.form.get('goal')
+                target_weight = request.form.get('target_weight')
+                temp = mongo.profile.find_one({'email': email, 'date': now}, {'height', 'weight', 'goal', 'target_weight'})
+                mongo.profile.insert({'email': email,
+                                             'date': now,
+                                             'height': height,
+                                             'weight': weight,
+                                             'goal': goal,
+                                             'target_weight': target_weight})
             flash(f'Account created for {form.username.data}!', 'success')
             return redirect(url_for('home'))
     else:
@@ -186,32 +248,37 @@ def user_profile():
     Input: Email, height, weight, goal, Target weight
     Output: Value update in database and redirected to home login page
     """
+    now = datetime.now()
+    now = now.strftime('%Y-%m-%d')
+
     if session.get('email'):
         form = UserProfileForm()
         if form.validate_on_submit():
-            email = session.get('email')
+            print("userProfile form validated");
             if request.method == 'POST':
+                email = session.get('email')
                 weight = request.form.get('weight')
                 height = request.form.get('height')
                 goal = request.form.get('goal')
                 target_weight = request.form.get('target_weight')
-                temp = mongo.profile.find_one({'email': email}, {
+                temp = mongo.profile.find_one({'email': email,'date': now}, {
                     'height', 'weight', 'goal', 'target_weight'})
                 if temp is not None:
-                    mongo.profile.update_one({'email': email},
+                    mongo.profile.update_one({'email': email, 'date': now},
                                             {"$set": {'weight': weight,
                                                       'height': height,
                                                       'goal': goal,
                                                       'target_weight': target_weight}})
                 else:
                     mongo.profile.insert_one({'email': email,
+                                              'date' :now,
                                              'height': height,
                                              'weight': weight,
                                              'goal': goal,
                                              'target_weight': target_weight})
-            data = mongo.profile.find_one({'email': email}, {'weight', 'height', 'target_weight'})
+            #data = mongo.profile.find_one({'email': email}, {'weight', 'height', 'target_weight'})
             flash(f'User Profile Updated', 'success')
-            return render_template('display_profile.html',data=data, status=True, form=form)
+            return redirect(url_for('display_profile'))
     else:
         return redirect(url_for('login'))
     return render_template('user_profile.html', status=True, form=form)
