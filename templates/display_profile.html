@@ -52,19 +52,19 @@
         <div>
             {{ graph_html|safe }}
 
-            <h2 style="color: white;">Last 10 Entries</h2>
+            <h2 style="color: black;">Last 10 Entries</h2>
             <table class="table">
                 <thead>
                     <tr>
-                        <th style="color: white;">Date</th>
-                        <th style="color: white;">Weight</th>
+                        <th style="color: black;">Date</th>
+                        <th style="color: black;">Weight</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for entry in last_10_entries %}
                         <tr>
-                            <td style="color: white;">{{ entry['date'] }}</td>
-                            <td style="color: white;">{{ entry['weight'] }}</td>
+                            <td style="color: black;">{{ entry['date'] }}</td>
+                            <td style="color: black;">{{ entry['weight'] }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
