@@ -20,7 +20,9 @@ from flask_pymongo import PyMongo
 from tabulate import tabulate
 from forms import HistoryForm, RegistrationForm, LoginForm, CalorieForm, UserProfileForm, EnrollForm, WellnessDataForm
 from apps import Mongo
-
+import schedule
+from threading import Thread
+import time
 
 app = Flask(__name__)
 app.secret_key = 'secret'
@@ -103,6 +105,12 @@ def logout():
 
 @app.route("/wellness_analysis", methods=['POST'])
 def wellness_analysis():
+    """
+    wellness_analysis() function displays the graphs for user's wellness data.
+    route "/wellness_analysis" will redirect to wellness_analysis() function.
+    Input: Email
+    Output: graphs of all wellness data
+    """
     now = datetime.now()
     now = now.strftime('%Y-%m-%d')
 
@@ -127,7 +135,7 @@ def wellness_analysis():
         # Plot daily water intake
         fig_water = go.Figure()
         fig_water.add_trace(go.Scatter(x=dates_wellness_data, y=[float(entry['water_intake']) for entry in my_wellness_data_list], mode='lines+markers', name='Water Intake'))
-        fig_water.update_layout(title='Daily Water Intake', xaxis=dict(title='Date'), yaxis=dict(title='Water Intake'), showlegend=True)
+        fig_water.update_layout(title='Daily Water Intake', xaxis=dict(title='Date'), yaxis=dict(title='No. of glasses'), showlegend=True)
 
         # Converting to HTML
         graph_html_sleep = fig_sleep.to_html(full_html=False)
@@ -143,7 +151,6 @@ def display_profile():
     """
     display_profile() function displays the user profile
     route "/display_profile" will redirect to display_profile() function.
-    display_profile() called and if the form is submitted then various values are fetched and updated into the database entries
     Input: Email
     Output: all user data
     """
