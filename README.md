@@ -48,11 +48,12 @@
 
 
 
-# BurnOut
+# My Fitness Tracker
 
-![WhatsApp Image 2021-09-28 at 2 48 00 PM](https://user-images.githubusercontent.com/25662536/135546154-cfae1d2e-439a-4edc-b0bb-57f693ef5a83.jpeg)
+![MyFitnessTracker](https://github.com/manali-teke/My-Fitness-Tracker/assets/67600147/ef2be463-aca3-44d1-9932-731382e37082)
 
-BurnOut is an easy to use application that keeps track of a user's daily calories gained and burnt. It can help the user to set goals such as weight loss/gain. Users can edit their profile by entering their height, weight, goal and target-weight. Users can enroll into numerous programs involving fitness such as yoga classes and workout sessions. Users can now connect with their friends by sending a friend-request and share their progress. This document provides a major perspective for the users to understand and take up the project as an Open source software and add on multiple features before releasing to the market. Also, the document aids the developers in understanding the code and acts as a reference point for continuing the project. 
+
+My Fitness Tracker is a user-friendly programme that tracks the number of calories burned and gained each day. Setting objectives like weight growth or decrease might be facilitated by it. By inputting their height, weight, goal, and target-weight, users may change their profile. Users may sign up for a variety of fitness-related programmes, including yoga courses and exercise sessions. By extending a friend invitation, users may now stay in touch with their pals and communicate their progress. This article offers a broad overview to help people grasp the project, accept it as open source software, and contribute further features before releasing it onto the public. The document also serves as a reference for the developers while they work on the project and helps them comprehend the code. 
 
 # Table of Contents  
 
