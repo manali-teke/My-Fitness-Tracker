@@ -19,6 +19,7 @@ function logout(){
     });
 }
 
+//Fetches history from mongodb and displays it on history form
 function history(e){
     const form = new FormData(e.target);
     date = form.get("date")
@@ -89,6 +90,7 @@ function approveRequest(e,clickedId){
     })
 }
 
+//Displays programs in which user has enrolled
 function dashboard(e, email){
     $.ajax({
         type: "POST",
@@ -100,7 +102,7 @@ function dashboard(e, email){
             console.log(response)
             resdata = JSON.parse(response)
             
-            $("#enroll_legend").empty().append("ENrolled: ")
+            $("#enroll_legend").empty().append("Enrolled: ")
             $("#enroll").empty().append(resdata.enroll)
         }
     })
