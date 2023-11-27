@@ -71,7 +71,93 @@
             </table>
         </div>
 
-  
+        <div>
+            <!-- {{ graph_html|safe }} -->
+
+            <h2 style="color: black;">Sleep Summary</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="color: black;">Date</th>
+                        <th style="color: black;">Hours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in wellness_data %}
+                        <tr>
+                            <td style="color: black;">{{ entry['date'] }}</td>
+                            <td style="color: black;">{{ entry['sleep_hours'] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <!-- {{ graph_html|safe }} -->
+
+            <h2 style="color: black;">Steps Summary</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="color: black;">Date</th>
+                        <th style="color: black;">Total Steps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in wellness_data %}
+                        <tr>
+                            <td style="color: black;">{{ entry['date'] }}</td>
+                            <td style="color: black;">{{ entry['steps'] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <!-- {{ graph_html|safe }} -->
+
+            <h2 style="color: black;">Water Intake Summary</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="color: black;">Date</th>
+                        <th style="color: black;">No. of glasses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in wellness_data %}
+                        <tr>
+                            <td style="color: black;">{{ entry['date'] }}</td>
+                            <td style="color: black;">{{ entry['water_intake'] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <!-- {{ graph_html|safe }} -->
+
+            <h2 style="color: black;">Mood Summary</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="color: black;">Date</th>
+                        <th style="color: black;">Mood</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in wellness_data %}
+                        <tr>
+                            <td style="color: black;">{{ entry['date'] }}</td>
+                            <td style="color: black;">{{ entry['mood'] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
 
     </div>

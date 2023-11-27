@@ -118,10 +118,12 @@ def display_profile():
         #data = mongo.profile.find_one({'email': email}, {'weight', 'height', 'target_weight'})
 
         user_data = mongo.profile.find_one({'email': email})
-        #my_wellness_data = mongo.wellness_data.find_one({'email': email})
+        wellness_data = mongo.wellness_data.find({'email': email})
+        print(list(wellness_data))
+        #print(wellness_data)
         target_weight=float(user_data['target_weight'])
         user_data_hist = list(mongo.profile.find({'email': email}))
-        print(user_data_hist)
+        #print(user_data_hist)
         if user_data_hist:
                 for entry in user_data_hist:
                     entry['date'] = datetime.strptime(entry['date'], '%Y-%m-%d').date()
@@ -151,8 +153,8 @@ def display_profile():
                 graph_html = fig.to_html(full_html=False)
 
                 last_10_entries = sorted_user_data_hist[-10:]
-                #return render_template('display_profile.html', status=True, user_data=user_data, wellness_data= my_wellness_data, graph_html=graph_html, last_10_entries=last_10_entries)
-                return render_template('display_profile.html', status=True, user_data=user_data, graph_html=graph_html, last_10_entries=last_10_entries)
+                return render_template('display_profile.html', status=True, user_data=user_data, wellness_data=wellness_data, graph_html=graph_html, last_10_entries=last_10_entries)
+                #return render_template('display_profile.html', status=True, user_data=user_data, graph_html=graph_html, last_10_entries=last_10_entries)
         else:
             flash(f'no 10 entries')
             return redirect(url_for('home'))
@@ -340,31 +342,22 @@ def wellness_data():
         form = WellnessDataForm()
         if form.validate_on_submit():
             print("WellnessData form validated")
-            if request.method == 'POST':
-                email = session.get('email')
-                sleep_hours = request.form.get('sleep_hours')
-                steps = request.form.get('steps')
-                water_intake = request.form.get('water_intake')
-                mood = request.form.get('mood')
-                temp = mongo.wellness_data.find_one({'email': email,'date': now}, {
-                    'sleep_hours', 'steps', 'water_intake', 'mood'})
-                if temp is not None:
-                    mongo.wellness_data.update_one({'email': email,
-                                                'date': now,
-                                                'sleep_hours': sleep_hours,
-                                                'steps': steps,
-                                                'water_intake': water_intake,
-                                                'mood': mood})
-                    flash(f'Wellness Data Updated', 'success')
-                else:
-                    mongo.wellness_data.insert_one({'email': email,
-                                                    'date': now,
-                                                    'sleep_hours': sleep_hours,
-                                                    'steps': steps,
-                                                    'water_intake': water_intake,
-                                                    'mood': mood})      
-                    flash(f'Wellness Data Inserted', 'success')
-        return redirect(url_for('display_profile'))
+            email = session.get('email')
+            sleep_hours = request.form.get('sleep_hours')
+            steps = request.form.get('steps')
+            water_intake = request.form.get('water_intake')
+            mood = request.form.get('mood')
+         
+            mongo.wellness_data.insert_one({'email': email,
+                                            'date': now,
+                                            'sleep_hours': sleep_hours,
+                                            'steps': steps,
+                                            'water_intake': water_intake,
+                                            'mood': mood})      
+            flash(f'Wellness Data Inserted', 'success')
+            return redirect(url_for('display_profile'))
+        # Render the template with the form instance when form is not valid
+        return render_template('wellness_data.html', status=True, form=form)
     else:
         return redirect(url_for('login'))
 
