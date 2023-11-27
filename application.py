@@ -104,11 +104,11 @@ def logout():
 @app.route("/display_profile", methods=['GET', 'POST'])
 def display_profile():
     """
-    user_profile() function displays the UserProfileForm (user_profile.html) template
-    route "/user_profile" will redirect to user_profile() function.
-    user_profile() called and if the form is submitted then various values are fetched and updated into the database entries
-    Input: Email, height, weight, goal, Target weight
-    Output: Value update in database and redirected to home login page
+    display_profile() function displays the user profile
+    route "/display_profile" will redirect to display_profile() function.
+    display_profile() called and if the form is submitted then various values are fetched and updated into the database entries
+    Input: Email
+    Output: all user data
     """
     now = datetime.now()
     now = now.strftime('%Y-%m-%d')
