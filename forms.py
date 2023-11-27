@@ -2,7 +2,7 @@ from datetime import date
 from re import sub
 from flask import app
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField
 from wtforms.fields.core import DateField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from apps import App,Mongo
@@ -107,6 +107,8 @@ class ResetPasswordForm(FlaskForm):
     submit = SubmitField('Reset')
 
 class DietPlanForm(FlaskForm):
+    day = IntegerField('Day',
+                           validators=[DataRequired()])
     app = App()      
     mongo = Mongo().mongoClient
     cursor = mongo.food.find()
@@ -122,18 +124,12 @@ class DietPlanForm(FlaskForm):
     food = SelectField(
         'Select Food', choices=food_result)
     
-    cursor = mongo.mealtype.find()
-    get_docs = []
-    for record in cursor:
-        get_docs.append(record)
+    
 
-    meal_type_result = []
-    temp = ""
-    for i in get_docs:
-        meal_type_result.append(i['mealtype'])
+    mealtypes = ["Breakfast", "Lunch", "Snacks", "Dinner", "Bedtime"]
     mealtype = SelectField(
-        'Select Meal Type', choices=meal_type_result)
-    submit = SubmitField('Save')
+        'Select Meal Type', choices=mealtypes)
+    submit = SubmitField('Save Diet Plan')
 
 class AdminForm(FlaskForm):
     name = StringField('Name',

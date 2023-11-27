@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<!-- This block extends the "layout.html" template and defines the content for the new_dashboard page. -->
+<!-- This block extends the "layout.html" template and defines the content for the dietician page. -->
 
-<div id="dietician-data col-md-12">
+<div class="dietician-data col-md-12 content-section">
     <!-- This div contains user data and their targets. -->
     <table title="User Data" class="table">
         <thead>
@@ -17,19 +17,21 @@
                 <th>Diet Plan</th>
             </tr>
         </thead>
-        <tbody>            
+        <tbody>
             {% for row in user_data %}
             <!-- Iterate through the 'user_data' list. -->
-            <tr>{{row["user_data.name"]}}</tr>
-            <tr>{{row["height"]}}</tr>
-            <tr>{{row["weight"]}}</tr>
-            <tr>{{row["target_weight"]}}</tr>
-            <tr>{{row["weight"]/((row["height"]/100)^2)}}</tr>
-            <tr><button click="calorie_data($row)" action="/calorie_data" type="button" class="btn btn-more-info">Calorie Data</button></tr>
-            <tr><button click="diet_plan($row)" action="/diet_plan" type="button" class="btn btn-primary">Diet Plan</button></tr>
+            <tr>
+                <td>{{row["user_data"]["name"]}}</td>
+                <td>{{row["height"]}}</td>
+                <td>{{row["weight"]}}</td>
+                <td>{{row["target_weight"]}}</td>
+                <td>{{ ((row["weight"]|float)/((row["height"]|float)*(row["height"]|float))*10000)|round(2, 'floor') }}</td>
+                <td><a class="btn btn-success" href="{{ url_for('calorie_data', user_email = row['email']) }}">Calorie Data</a></td>
+                <td><a href="{{ url_for('diet_plan', user_email = row['email'], name = row['user_data']['name']) }}" class="btn btn-primary">Create Diet
+                        Plan</a></td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
-
-{% endblock %}
+{% endblock content %}

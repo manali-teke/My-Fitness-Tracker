@@ -12,6 +12,7 @@ from flask_pymongo import PyMongo
 from tabulate import tabulate
 from forms import HistoryForm, RegistrationForm, LoginForm, CalorieForm, UserProfileForm, EnrollForm, DietPlanForm, AdminForm, DieticianForm, TrainerForm
 from apps import Mongo
+from urllib.parse import urlsplit,unquote,parse_qs, urlparse
 
 
 app = Flask(__name__)
@@ -152,7 +153,7 @@ def create_user(user_name, email, password, user_role):
     flash(f'Account created for {user_name}!', 'success')
 
 @app.route("/calories", methods=['GET', 'POST'])
-def calories():
+def calories(email = None):
     """
     calorie() function displays the Calorieform (calories.html) template
     route "/calories" will redirect to calories() function.
@@ -163,14 +164,14 @@ def calories():
     now = datetime.now()
     now = now.strftime('%Y-%m-%d')
     form = CalorieForm()
-    get_session = session.get('email')
-    if get_session is not None:
+    if email is None:
+        email = session.get('email')        
+    if email is not None:
         
         if form.validate_on_submit():
             print(form,"this is the form")
             print(request,"this is the request ")
             if request.method == 'POST':
-                email = session.get('email')
                 date = request.form.get('date')
                 food = request.form.get('food')
                 # print(food)
@@ -905,8 +906,8 @@ def dietician():
     user_data = None
     email = session.get('email')    
     if email is not None:
-        dietician = mongo.user.find_one({'email': email, 'profile':'dietician'},{'active'})
-        if(not dietician['active']):
+        dietician = mongo.user.find_one({'email': email, 'role':'dietician'},{'active'})
+        if not dietician['active']:
             return redirect(url_for('change_password'))
         #form = UserProfileForm()
         #if form.validate_on_submit():
@@ -939,20 +940,36 @@ def dietician():
     else:
         redirect(url_for('login'))
 
-@app.route("/diet_plan", methods=['GET','POST'])
-def diet_plan(row_data):
+@app.route("/diet_plan/<user_email>/<name>/", methods=['GET','POST'])
+def diet_plan(user_email, name):
     form  = DietPlanForm()
-    user_email = row_data["email"]
-    user_name = row_data["user_data.name"]
+    # print(row_data)
+    # email = row_data.split(", ")
+
+    # row = unquote(row_data)
+    # print(dir(row_data))
+    # row_data_object = json.loads(row.replace("'", "\""))
+    # print(row_data_object)
+    # user_email = email
+    # user_name = name
     email = session.get('email')
     if email is not None:
         diet_plan = mongo.dietplan.find({'user': user_email, 'dietician': email, "active": True },{"plan"})
         #for plan in diet_plan:
         #    meals = list(plan["meals"])
         #    for meal in meals:
-        return render_template('diet_plan.html', title=f'Diet Plan for {user_name}',status=True, form = form, diet_plan = diet_plan)
+        #if request.method == "POST":
+        #    if form.validate_on_submit():
+        title = f'Diet Plan for {name}'
+        return render_template('diet_plan.html', title=title, status=True, form = form, diet_plan = diet_plan, dietician=email, user_email=user_email, name=name)
     else:
         redirect(url_for('login'))
+
+@app.route("/save_diet_plan", methods=['POST'])
+def save_diet_plan(diet_plan, user_email, name):
+    if diet_plan is not None:
+        mongo.dietplan.insert_one(diet_plan)
+    return redirect(url_for('diet_plan', user_email = user_email, name = name))
 
 @app.route('/trainer', methods=['GET','POST'])
 def trainer():
@@ -960,8 +977,8 @@ def trainer():
     user_data = None
     email = session.get('email')    
     if email is not None:
-        trainer = mongo.user.find_one({'email': email, 'profile':'trainer'},{'active'})
-        if(not trainer['active']):
+        trainer = mongo.user.find_one({'email': email, 'role':'trainer'},{'active'})
+        if not trainer['active']:
             return redirect(url_for('change_password'))
         #form = UserProfileForm()
         #if form.validate_on_submit():
@@ -993,6 +1010,16 @@ def trainer():
             return render_template('trainer.html', title='Trainer',status=True, form = form, user_data = user_data)
     else:
         redirect(url_for('login'))
+
+@app.route('/calorie_data/<user_email>', methods=['GET','POST'])
+def calorie_data(user_email):
+    email = session.get('email')    
+    if email is not None:
+        print(user_email)
+        calories(user_email)
+        return redirect(url_for('calories', email = user_email))
+    else:
+        return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0",port=3000)

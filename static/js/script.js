@@ -1,5 +1,3 @@
-const { load } = require("mime");
-
 function addToLocalStorage(key,data){
     localStorage.setItem(key) = data;
 }

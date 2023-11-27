@@ -90,7 +90,7 @@
                     {% elif session.get("role") == "dietician": %}
                     <div class="col-lg-6 col-md-6">
                       <ul class="list-unstyled text-muted">
-                        <li><a class="nav-item nav-link" href="{{ url_for('diet_plan') }}">Diet Plan</a></li>
+                        <li><a class="nav-item nav-link" href="{{ url_for('dietician') }}">My Dashboard</a></li>
                       </ul>
                     </div>
                     {% elif session.get("role") == "trainer": %}

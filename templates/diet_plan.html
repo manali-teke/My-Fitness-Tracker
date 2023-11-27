@@ -1,29 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="content-section">
-    <form method="POST" action="">
-        <div class="form-group">
-            {{ form.mealtype.label(class="form-control-label") }}
-            {% if form.mealtype.errors %}
-            {{ form.mealtype(class="form-control form-control-sm is-invalid") }}
-            <div class="invalid-feedback">
-                {% for error in form.mealtype.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </div>
-            {% else %}
-            {{ form.mealtype(class="form-control form-control-sm") }}
-            {% endif %}
-        </div>
-    </form>
-</div>
-
-{% extends "layout.html" %}
-{% block content %}
-<div class="content-section">
     <div class="row">
         <div class="col-md-4 col-sm-12 col-xs-12 create-diet-plan pr-2">
-            <form method="POST" onSubmit="saveDietPlan()" name='dietplanform'>
+            <form method="POST" id="diet_plan_form" onSubmit="saveDietPlan()" name='dietplanform'>
                 <!-- Include hidden fields for form data -->
                 {{ form.hidden_tag() }}
 
@@ -31,28 +11,64 @@
                     <legend class="border-bottom mb-4">Diet Plan</legend>
 
                     <div class="form-group">
+                        {{ form.day.label(class="form-control-label") }}
+                        {% if form.day.errors %}
+                        {{ form.day(class="form-control form-control-sm is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.day.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.day(class="form-control form-control-sm") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
                         {{ form.mealtype.label(class="form-control-label") }}
+                        {% if form.mealtype.errors %}
+                        {{ form.mealtype(class="form-control form-control-sm is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.mealtype.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
                         {{ form.mealtype(class="form-control form-control-sm") }}
+                        {% endif %}
                     </div>
 
                     <div class="form-group">
                         {{ form.food.label(class="form-control-label") }}
+                        {% if form.food.errors %}
+                        {{ form.food(class="form-control form-control-sm is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.food.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
                         {{ form.food(class="form-control form-control-sm") }}
+                        {% endif %}
                     </div>
+
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary" click="add_meal()"></button>
+                        <button type="button" class="btn btn-danger" onclick="add_meal(dietician, user_email)">Add
+                            Meal</button>
                     </div>
                 </fieldset>
 
                 <div class="form-group">
                     <!-- Submit button for the form -->
-                    {{ form.submit(class="btn btn-more-info") }}
+                    <button type="button" class="btn btn-primary"
+                        onclick="save_diet_plan($event, user_email, name)">Save Diet Plan</button>
+                    <!-- {{ form.submit(class="btn btn-secondary") }} -->
                 </div>
         </div>
         <div class="col-md-8 col-sm-12 col-xs-12 show-diet-plan pl-2">
             {% for plan in diet_plan %}
             <table class="table">
-                <thead>                    
+                <thead>
                     <tr>
                         {% for day in plan["day"] %}
                         <th>{{day}}</th>
@@ -64,8 +80,9 @@
                     <tr>
                         {% for day in plan["day"] %}
                         <td>
+                            <div class="row">{{ meal['day']}}</div>
                             <div class="row">{{ meal['mealtype']}}</div>
-                            <div class="row">{{ meal['food']}}</div>                            
+                            <div class="row">{{ meal['food']}}</div>
                         </td>
                         {% endfor %}
                     </tr>
@@ -75,7 +92,40 @@
             {% endfor %}
         </div>
     </div>
-    
     </form>
 </div>
+<script type="text/JavaScript">
+    var meals = []
+    var diet_plan = {user: null, dietician: null, active: false, meals: []}
+    document.ready(function(){
+        meals = []
+        diet_plan = {user: null, dietician: null, active: false, meals: []}
+    })
+    
+    function add_meal(dietician, user_email) {
+        diet_plan.user = user_email
+        diet_plan.dietician = dietician    
+        form = document.getElementById("diet_plan_form")
+        diet_plan.meals.append({"day": form.day.value, "mealtype": form.mealtype.value, 'food':form.food.value})
+        form.mealtype.value = ""
+        form.food.value = ""
+        form.day.value = "" 
+    }
+
+    function save_diet_plan(e, user_email, name){
+        diet_plan.active = true
+        $.ajax({
+            type: "POST",
+            url: "/diet_plan",
+            data:{
+                "diet_plan":diet_plan,
+                "user_email":user_email,
+                "name":name
+            },
+            success: function(response){
+                console.log(response)
+            }
+        })
+    }
+</script>
 {% endblock content %}
