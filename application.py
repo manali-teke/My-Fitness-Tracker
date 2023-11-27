@@ -18,7 +18,7 @@ from flask import render_template, session, url_for, flash, redirect, request, F
 from flask_mail import Mail
 from flask_pymongo import PyMongo
 from tabulate import tabulate
-from forms import HistoryForm, RegistrationForm, LoginForm, CalorieForm, UserProfileForm, EnrollForm
+from forms import HistoryForm, RegistrationForm, LoginForm, CalorieForm, UserProfileForm, EnrollForm, WellnessDataForm
 from apps import Mongo
 
 
@@ -118,6 +118,7 @@ def display_profile():
         #data = mongo.profile.find_one({'email': email}, {'weight', 'height', 'target_weight'})
 
         user_data = mongo.profile.find_one({'email': email})
+        #my_wellness_data = mongo.wellness_data.find_one({'email': email})
         target_weight=float(user_data['target_weight'])
         user_data_hist = list(mongo.profile.find({'email': email}))
         print(user_data_hist)
@@ -150,6 +151,7 @@ def display_profile():
                 graph_html = fig.to_html(full_html=False)
 
                 last_10_entries = sorted_user_data_hist[-10:]
+                #return render_template('display_profile.html', status=True, user_data=user_data, wellness_data= my_wellness_data, graph_html=graph_html, last_10_entries=last_10_entries)
                 return render_template('display_profile.html', status=True, user_data=user_data, graph_html=graph_html, last_10_entries=last_10_entries)
         else:
             flash(f'no 10 entries')
@@ -329,44 +331,42 @@ def ajaxhistory():
                 return json.dumps({'date': "", 'email': "", 'burnout': "", 'calories': ""}), 200, {
                     'ContentType': 'application/json'}
 
-# @app.route("/ajaxhistory", methods=['POST'])
-# def ajaxhistory():
-#     # ############################
-#     # ajaxhistory() is a POST function displays the fetches the various information from database
-#     # route "/ajaxhistory" will redirect to ajaxhistory() function.
-#     # Details corresponding to given email address are fetched from the database entries
-#     # Input: Email, date
-#     # Output: date, email, calories, burnout
-#     # ##########################
-#     email = get_session = session.get('email')
-#     print(email)
-#     if get_session is not None:
-#         if request.method == "POST":
-#             date = request.form.get('date')
-#             print("Received date:", date)
-#             res = mongo.calories.find_one({'email': email, 'date': date}, {
-#                                              'date', 'email', 'calories', 'burnout'})
-#             if res:
-#                 print("Response:", res)
-#                         # Create a pie chart using Plotly
-#                 total_calories =res['calories']
-#                 burnout = res['burnout']
-#                 burnout_percentage = (burnout / total_calories) * 100
-#                 calories_burnout_percentage = 100 - burnout_percentage
+@app.route("/wellness_data", methods=['GET', 'POST'])
+def wellness_data():
+    now = datetime.now()
+    now = now.strftime('%Y-%m-%d')
 
-#                 # Create a Plotly pie chart
-#                 lab = ['Burnout', 'Remainder Calories']
-#                 vals = [burnout_percentage, calories_burnout_percentage]
-
-#                 pie_chart = px.pie(values=vals,names=lab )
-#                 pie_html = pie_chart.to_html(full_html=False)
-#                 #print(pie_html)
-#                 return json.dumps({'date': res['date'], 'email': res['email'], 'burnout': res['burnout'], 'calories': res['calories'], 'graph_html': pie_html}), 200, {
-#                     'ContentType': 'application/json'}
-#             else:
-#                 print("No data found for the date.")
-#                 return json.dumps({'date': "", 'email': "", 'burnout': "", 'calories': ""}), 200, {
-#                     'ContentType': 'application/json'}
+    if session.get('email'):
+        form = WellnessDataForm()
+        if form.validate_on_submit():
+            print("WellnessData form validated")
+            if request.method == 'POST':
+                email = session.get('email')
+                sleep_hours = request.form.get('sleep_hours')
+                steps = request.form.get('steps')
+                water_intake = request.form.get('water_intake')
+                mood = request.form.get('mood')
+                temp = mongo.wellness_data.find_one({'email': email,'date': now}, {
+                    'sleep_hours', 'steps', 'water_intake', 'mood'})
+                if temp is not None:
+                    mongo.wellness_data.update_one({'email': email,
+                                                'date': now,
+                                                'sleep_hours': sleep_hours,
+                                                'steps': steps,
+                                                'water_intake': water_intake,
+                                                'mood': mood})
+                    flash(f'Wellness Data Updated', 'success')
+                else:
+                    mongo.wellness_data.insert_one({'email': email,
+                                                    'date': now,
+                                                    'sleep_hours': sleep_hours,
+                                                    'steps': steps,
+                                                    'water_intake': water_intake,
+                                                    'mood': mood})      
+                    flash(f'Wellness Data Inserted', 'success')
+        return redirect(url_for('display_profile'))
+    else:
+        return redirect(url_for('login'))
 
 
 @app.route("/friends", methods=['GET', 'POST'])

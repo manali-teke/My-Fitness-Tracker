@@ -83,7 +83,13 @@ class CalorieForm(FlaskForm):
     burnout = StringField('Burn Out', validators=[DataRequired()])
     submit = SubmitField('Save')
 
-
+class WellnessDataForm(FlaskForm):
+    sleep_hours = StringField('Todays\'s Sleep Hours', validators=[DataRequired(), Length(min=2, max=20)])
+    steps = StringField('Todays\'s Total Steps', validators=[DataRequired(), Length(min=2, max=20)])
+    water_intake = StringField('Todays\'s Water Intake', validators=[DataRequired(), Length(min=2, max=20)])
+    mood = StringField('Mood', validators=[DataRequired(), Length(min=2, max=20)])
+    submit = SubmitField('Save Wellness Data')
+    
 class UserProfileForm(FlaskForm):
     weight = StringField(
         'Weight', validators=[
