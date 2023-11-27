@@ -36,9 +36,10 @@
             </div>
             {% else %}
             <div class="navbar-nav mr-4">
-              <a class="nav-item nav-link" href="{{ url_for('calories') }}">Enter Calories</a>
+              <a class="nav-item nav-link" href="{{ url_for('calories') }}">Calories</a>
               <a class="nav-item nav-link" href="{{ url_for('history') }}">History</a>
               <a class="nav-item nav-link" href="{{url_for('friends')}}">Friends</a>
+              <a class="nav-item nav-link" href="{{url_for('favorites')}}">Favorites</a>
               <a class="nav-item nav-link btn btn-link" href="{{ url_for('workout_suggestions') }}">Suggestion</a>
               <!-- <li><a class="nav-item nav-link" href="{{ url_for('submit_reviews') }}">Review</a></li> -->
               <a class="nav-item nav-link btn btn-link" href="{{ url_for('display_profile') }}">Profile</a>
@@ -91,7 +92,7 @@
                           <h6 class="text-white mb-3"><a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a></h6>
                     </div>
                     {% else %}
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-10 col-md-10">
                       <div style="display: inline-block;">
                           <h6 class="text-white mb-3"><a class="nav-item nav-link" href="{{ url_for('submit_reviews') }}">Review</a></h6>
                       </div>

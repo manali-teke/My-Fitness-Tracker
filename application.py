@@ -4,6 +4,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 from bson import ObjectId
 
+from insert_exercise_data import insertexercisedata
+
 import plotly.io as pio
 import io
 import base64
@@ -11,8 +13,9 @@ import base64
 import bcrypt
 import smtplib
 
+
 # from apps import App
-from flask import json
+from flask import json, jsonify
 # from utilities import Utilities
 from flask import render_template, session, url_for, flash, redirect, request, Flask
 from flask_mail import Mail
@@ -36,7 +39,7 @@ app.config['MAIL_USERNAME'] = "bogusdummy123@gmail.com"
 app.config['MAIL_PASSWORD'] = "helloworld123!"
 mail = Mail(app)
 
-
+insertexercisedata()
 @app.route("/")
 @app.route("/home")
 def home():
@@ -172,7 +175,62 @@ def submit_reviews():
         return render_template('review.html', form=form, existing_reviews=existing_reviews)
     else:
         return "User not logged in"
-    
+
+@app.route('/add_favorite', methods=['POST'])
+def add_favorite():
+    email = get_session = session.get('email')
+    if session.get('email'):
+        data = request.get_json()
+        exercise_id = data.get('exercise_id')
+        print(exercise_id)
+        action = data.get('action')
+        exercise = mongo.your_exercise_collection.find_one({"exercise_id": exercise_id})
+        print(exercise)
+        if exercise:
+            if action=="add":
+            # Create a new document in the favorites schema (you can customize this schema)
+                favorite = {
+                    "exercise_id":exercise.get("exercise_id"),
+                    "email": email,
+                    "image": exercise.get("image"),
+                    "video_link": exercise.get("video_link"),
+                    "name": exercise.get("name"),
+                    "description": exercise.get("description"),
+                    "href": exercise.get("href")
+                }
+
+            # Insert the exercise into the favorites collection
+                mongo.favorites.insert_one(favorite)
+                return jsonify({"status": "success"})
+            elif action=="remove":
+                print(exercise.get("exercise_id"))
+                print("iamhere1")
+                mongo.favorites.delete_one({"email": email, "exercise_id": exercise.get("exercise_id")})
+                return jsonify({"status": "success"})
+
+
+        else:
+            return jsonify({"status": "error", "message": "Exercise not found"})
+    else:
+        return redirect(url_for('login'))
+
+    return json.dumps({'status': False}), 500, {
+        'ContentType:': 'application/json'
+    }
+
+@app.route('/favorites')
+def favorites():
+    email = session.get('email')
+    if not email:
+        # Redirect the user to the login page or show an error message
+        return redirect(url_for('login'))
+
+    # Query MongoDB to get the user's favorite exercises
+    favorite_exercises = mongo.favorites.find({"email": email})
+
+    return render_template('favorites.html', favorite_exercises=favorite_exercises)
+
+
 @app.route("/display_profile", methods=['GET', 'POST'])
 def display_profile():
     """
