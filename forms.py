@@ -41,14 +41,10 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
-
+#Creates form for user to enter calorie information
 class CalorieForm(FlaskForm):
     app = App()
-      
     mongo = Mongo().mongoClient
-    
-
-    print(mongo.command('ping'))
     cursor = mongo.food.find()
     get_docs = []
     for record in cursor:
@@ -57,7 +53,6 @@ class CalorieForm(FlaskForm):
     result = []
     temp = ""
     for i in get_docs:
-        print(i)
         temp = i['Food'] + ' (' + i['Calories'] + ')'
         result.append((temp, temp))
 
@@ -68,6 +63,7 @@ class CalorieForm(FlaskForm):
     submit = SubmitField('Save')
 
 
+#Creates form for user to enter profile information
 class UserProfileForm(FlaskForm):
     weight = StringField(
         'Weight', validators=[
@@ -88,16 +84,18 @@ class UserProfileForm(FlaskForm):
     submit = SubmitField('Save Profile')
 
 
+#Creates form for user to fetch history
 class HistoryForm(FlaskForm):
     app = App()
     date = DateField()
     submit = SubmitField('Fetch')
 
-
+#Creates form for user to enroll into workout plans
 class EnrollForm(FlaskForm):
     app = App()
     submit = SubmitField('Enroll')
 
+#Creates form for user to reset password
 class ResetPasswordForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField(
