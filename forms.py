@@ -115,6 +115,17 @@ class HistoryForm(FlaskForm):
     date = DateField()
     submit = SubmitField('Fetch')
 
+class ReviewForm(FlaskForm):
+    """Form to input the different reviews about the application"""
+    review = StringField(
+        'Review', validators=[
+            DataRequired(), Length(
+                min=2, max=200)])
+    name = StringField(
+        'Name', validators=[
+            DataRequired(), Length(
+                min=2, max=200)])
+    submit = SubmitField('Submit')
 
 class EnrollForm(FlaskForm):
     app = App()
