@@ -83,7 +83,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for entry in wellness_data %}
+                    {% for entry in my_wellness_data %}
                         <tr>
                             <td style="color: black;">{{ entry['date'] }}</td>
                             <td style="color: black;">{{ entry['sleep_hours'] }}</td>
@@ -97,6 +97,11 @@
             <!-- {{ graph_html|safe }} -->
 
             <h2 style="color: black;">Steps Summary</h2>
+            <!-- <p>{{ my_wellness_data|length }} entries found</p>
+                {% for entry in my_wellness_data %}
+                    <p>{{ entry }}</p>
+                {% endfor %} -->
+
             <table class="table">
                 <thead>
                     <tr>
@@ -105,7 +110,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for entry in wellness_data %}
+                    {% for entry in my_wellness_data %}
                         <tr>
                             <td style="color: black;">{{ entry['date'] }}</td>
                             <td style="color: black;">{{ entry['steps'] }}</td>
@@ -127,7 +132,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for entry in wellness_data %}
+                    {% for entry in my_wellness_data %}
                         <tr>
                             <td style="color: black;">{{ entry['date'] }}</td>
                             <td style="color: black;">{{ entry['water_intake'] }}</td>
@@ -149,7 +154,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for entry in wellness_data %}
+                    {% for entry in my_wellness_data %}
                         <tr>
                             <td style="color: black;">{{ entry['date'] }}</td>
                             <td style="color: black;">{{ entry['mood'] }}</td>

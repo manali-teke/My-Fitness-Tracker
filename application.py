@@ -118,8 +118,9 @@ def display_profile():
         #data = mongo.profile.find_one({'email': email}, {'weight', 'height', 'target_weight'})
 
         user_data = mongo.profile.find_one({'email': email})
-        wellness_data = mongo.wellness_data.find({'email': email})
-        print(list(wellness_data))
+        my_wellness_data = mongo.wellness_data.find({'email': email})
+        my_wellness_data_list = list(my_wellness_data)
+        print(my_wellness_data_list)
         #print(wellness_data)
         target_weight=float(user_data['target_weight'])
         user_data_hist = list(mongo.profile.find({'email': email}))
@@ -153,7 +154,7 @@ def display_profile():
                 graph_html = fig.to_html(full_html=False)
 
                 last_10_entries = sorted_user_data_hist[-10:]
-                return render_template('display_profile.html', status=True, user_data=user_data, wellness_data=wellness_data, graph_html=graph_html, last_10_entries=last_10_entries)
+                return render_template('display_profile.html', status=True, user_data=user_data, my_wellness_data=my_wellness_data_list, graph_html=graph_html, last_10_entries=last_10_entries)
                 #return render_template('display_profile.html', status=True, user_data=user_data, graph_html=graph_html, last_10_entries=last_10_entries)
         else:
             flash(f'no 10 entries')
