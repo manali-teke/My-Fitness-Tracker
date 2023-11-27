@@ -122,6 +122,30 @@ def display_profile():
         my_wellness_data_list = list(my_wellness_data)
         print(my_wellness_data_list)
         #print(wellness_data)
+
+        # Get dates for the wellness data
+        dates_wellness_data = [entry['date'] for entry in my_wellness_data_list]
+
+        # Plot daily sleep hours
+        fig_sleep = go.Figure()
+        fig_sleep.add_trace(go.Scatter(x=dates_wellness_data, y=[float(entry['sleep_hours']) for entry in my_wellness_data_list], mode='lines+markers', name='Sleep Hours'))
+        fig_sleep.update_layout(title='Daily Sleep Hours', xaxis=dict(title='Date'), yaxis=dict(title='Sleep Hours'), showlegend=True)
+
+        # Plot daily steps
+        fig_steps = go.Figure()
+        fig_steps.add_trace(go.Scatter(x=dates_wellness_data, y=[float(entry['steps']) for entry in my_wellness_data_list], mode='lines+markers', name='Steps'))
+        fig_steps.update_layout(title='Daily Steps', xaxis=dict(title='Date'), yaxis=dict(title='Steps'), showlegend=True)
+
+        # Plot daily water intake
+        fig_water = go.Figure()
+        fig_water.add_trace(go.Scatter(x=dates_wellness_data, y=[float(entry['water_intake']) for entry in my_wellness_data_list], mode='lines+markers', name='Water Intake'))
+        fig_water.update_layout(title='Daily Water Intake', xaxis=dict(title='Date'), yaxis=dict(title='Water Intake'), showlegend=True)
+
+        # Converting to HTML
+        graph_html_sleep = fig_sleep.to_html(full_html=False)
+        graph_html_steps = fig_steps.to_html(full_html=False)
+        graph_html_water = fig_water.to_html(full_html=False)
+
         target_weight=float(user_data['target_weight'])
         user_data_hist = list(mongo.profile.find({'email': email}))
         #print(user_data_hist)
@@ -154,7 +178,7 @@ def display_profile():
                 graph_html = fig.to_html(full_html=False)
 
                 last_10_entries = sorted_user_data_hist[-10:]
-                return render_template('display_profile.html', status=True, user_data=user_data, my_wellness_data=my_wellness_data_list, graph_html=graph_html, last_10_entries=last_10_entries)
+                return render_template('display_profile.html', status=True, user_data=user_data, my_wellness_data=my_wellness_data_list, graph_html=graph_html,graph_html_sleep=graph_html_sleep,graph_html_steps=graph_html_steps,graph_html_water=graph_html_water, last_10_entries=last_10_entries)
                 #return render_template('display_profile.html', status=True, user_data=user_data, graph_html=graph_html, last_10_entries=last_10_entries)
         else:
             flash(f'no 10 entries')
