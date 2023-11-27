@@ -216,10 +216,10 @@ Link to the implementation video of the BurnOut application:
 <center>
   <table>
     <tr>
-      <td align="center"><a href="https://github.com/chaithanyaMarripati">Krishna Chaitanya</a></td>
-      <td align="center"><a href="https://github.com/S-B-Mukesh">S.B.Mukesh</a></td>
-      <td align="center"><a href="https://github.com/subhang51011">Sai Subhang</a></td>
-      <td align="center"><a href="https://github.com/saivikasreddy717">Sai Vikas</a></td>
+      <td align="center"><a href="https://github.com/manali-teke">Manali Teke</a></td>
+      <td align="center"><a href="https://github.com/VaibhaviShetty23">Vaibhavi Shetty</a></td>
+      <td align="center"><a href="https://github.com/adityajson">Aditya Sonar</a></td>
+      <td align="center"><a href="https://github.com/nuttysunday">Shivam Ghodke</a></td>
     </tr>
   </table>
 </center>
