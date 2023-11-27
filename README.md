@@ -57,7 +57,7 @@ My Fitness Tracker is a user-friendly programme that tracks the number of calori
 
 # Table of Contents  
 
-- [Why use MyFitnessTracker?](#why-use-burnout)
+- [Why use MyFitnessTracker?](#why-use-myfitnesstracker)
 - [Implementation](#implementation)
 - [TechStack Used for the Development of Project:](#techstack-used-for-the-development-of-project)
 - [Core Functionalities of the Application:](#core-functionalities)
