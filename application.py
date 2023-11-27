@@ -5,12 +5,12 @@ import smtplib
 
 # from apps import App
 from flask import json
-# from utilities import Utilities
+from utilities import Utilities
 from flask import render_template, session, url_for, flash, redirect, request, Flask
 from flask_mail import Mail
 from flask_pymongo import PyMongo
 from tabulate import tabulate
-from forms import HistoryForm, RegistrationForm, LoginForm, CalorieForm, UserProfileForm, EnrollForm, DietPlanForm, DieticianForm, TrainerForm
+from forms import HistoryForm, RegistrationForm, LoginForm, CalorieForm, UserProfileForm, EnrollForm, DietPlanForm, AdminForm, DieticianForm, TrainerForm
 from apps import Mongo
 
 
@@ -145,9 +145,10 @@ def register():
         return redirect(url_for('home'))
     return render_template('register.html', title='Register', form=form)
 
-def create_user(user_name, email, password, user_profile):
+def create_user(user_name, email, password, user_role):
+    active = True if user_role == "user" else False
     mongo.user.insert_one({'name': user_name, 'email': email, 'pwd': bcrypt.hashpw(
-                    password.encode("utf-8"), bcrypt.gensalt()), 'profile':user_profile})
+                    password.encode("utf-8"), bcrypt.gensalt()), 'role':user_role, 'active':active})
     flash(f'Account created for {user_name}!', 'success')
 
 @app.route("/calories", methods=['GET', 'POST'])
@@ -866,10 +867,13 @@ def workout_suggestions():
 @app.route('/admin', methods=['GET','POST'])
 def admin():
     email = session.get('email')
-    if not email:
-        form = RegistrationForm()
+    if email is not None:
+        form = AdminForm()
         if form.validate_on_submit():
-            create_user(request.form.get('username'), request.form.get('email'), request.form.get('password'), request.form.get('profile'))
+            util = Utilities()
+            password = str(util.get_random_string(8))
+            create_user(request.form.get('name'), request.form.get('email'), password, request.form.get('role'))
+            util.send_email(request.form.get('email'), password)
         user_pipeline = [
             {
                 '$project': {
@@ -890,8 +894,10 @@ def admin():
                 '$limit': 50
             }
         ]
-        user_data = list(mongo.user.aggregate(user_pipeline).filter())
-    return render_template('admin.html', title='Admin',status=True, form = form, user_data = user_data)
+        user_data = list(mongo.user.aggregate(user_pipeline))
+        return render_template('admin.html', title='Admin',status=True, form = form, user_data = user_data)
+    else:
+        redirect(url_for('login'))
 
 @app.route('/dietician', methods=['GET','POST'])
 def dietician():

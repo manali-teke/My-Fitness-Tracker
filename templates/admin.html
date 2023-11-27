@@ -2,49 +2,50 @@
 
 {% block content %}
 <!-- This block extends the "layout.html" template and defines the content for the new_dashboard page. -->
-<div>
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12 pr-2">
     <div class="content-section">
-        <form method="POST" action="">
+        <form method="POST" action="\admin">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Create User</legend>
                 <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
-                    {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-sm is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.email.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.email(class="form-control form-control-sm") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
                     {{ form.name.label(class="form-control-label") }}
                     {% if form.name.errors %}
-                        {{ form.name(class="form-control form-control-sm is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.name.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
+                    {{ form.name(class="form-control form-control-sm is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.name.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
                     {% else %}
-                        {{ form.name(class="form-control form-control-sm") }}
+                    {{ form.name(class="form-control form-control-sm") }}
+                    {% endif %}
+                </div>                
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-sm is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.email(class="form-control form-control-sm") }}
                     {% endif %}
                 </div>
                 <div class="form-group">
                     {{ form.role.label(class="form-control-label") }}
                     {% if form.role.errors %}
-                        {{ form.role(class="form-control form-control-sm is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.role.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
+                    {{ form.role(class="form-control form-control-sm is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.role.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
                     {% else %}
-                        {{ form.role(class="form-control form-control-sm") }}
+                    {{ form.role(class="form-control form-control-sm") }}
                     {% endif %}
                 </div>
             </fieldset>
@@ -54,29 +55,34 @@
         </form>
     </div>
 </div>
-<div class="col-md-12">
+<div class="col-md-8 col-sm-6 col-xs-12 pl-2">
     <!-- This div contains user data and their targets. -->
     <table title="User Data" class="table user-data">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Reset Password</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col">Reset Password</th>
             </tr>
         </thead>
-        <tbody>            
+        <tbody>
             {% for row in user_data %}
-            {% if(row["name"] != "") %}
+            {% if row["name"] != "": %}
             <!-- Iterate through the 'user_data' list. -->
-            <tr>{{row["name"]}}</tr>
-            <tr>{{row["email"]}}</tr>
-            <tr>{{row["role"]}}</tr>
-            <tr><button click="reset_password($row)" action="/reset_password" type="button" class="btn btn-more-info">Reset Password</button></tr>
+            <tr>
+                <td>{{row["name"]}}</td>
+                <td>{{row["email"]}}</td>
+                <td>{{row["role"]}}</td>
+                <td><button click="reset_password($row)" action="/reset_password" type="button"
+                        class="btn btn-primary">Reset Password</button></td>
+            </tr>
             {% endif %}
             {% endfor %}
         </tbody>
     </table>
 </div>
+</div>
+
 
 {% endblock %}

@@ -136,11 +136,11 @@ class DietPlanForm(FlaskForm):
     submit = SubmitField('Save')
 
 class AdminForm(FlaskForm):
-    name = StringField('name',
+    name = StringField('Name',
                            validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
-    roles = [ "dietician", "trainer" ]
+    roles = [ "Dietician", "Trainer" ]
     role = SelectField(
         'Role', choices=roles)
     submit = SubmitField('Save')
