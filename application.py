@@ -10,7 +10,7 @@ from flask import render_template, session, url_for, flash, redirect, request, F
 from flask_mail import Mail
 from flask_pymongo import PyMongo
 from tabulate import tabulate
-from forms import HistoryForm, RegistrationForm, LoginForm, CalorieForm, UserProfileForm, EnrollForm
+from forms import HistoryForm, RegistrationForm, LoginForm, CalorieForm, UserProfileForm, EnrollForm, DietPlanForm, DieticianForm, TrainerForm
 from apps import Mongo
 
 
@@ -55,8 +55,8 @@ def login():
         form = LoginForm()
         if form.validate_on_submit():
             email = session.get('email')
-            temp = mongo.user.find_one({'email': form.email.data}, {
-                'email', 'pwd','name'})
+            temp = mongo.user.find_one({"name":{"$exists": True },'email': form.email.data}, {
+                'email', 'pwd','name','role'})
             print("temp value is here", temp)
             if temp is not None and temp['email'] == form.email.data and (
                 bcrypt.checkpw(
@@ -66,11 +66,29 @@ def login():
                 session['email'] = temp['email']
                 session['name'] = temp['name']
                 #session['login_type'] = form.type.data
-                data = mongo.profile.find_one({'email': temp['email']}, {'weight', 'height', 'target_weight'})
-                if data:
-                    return redirect(url_for('dashboard'))
-                else:
-                    return redirect(url_for('user_profile')) #render_template('user_profile.html', title = "Details")
+                try:
+                    session["role"] = temp["role"]
+                    if(temp["role"].lower() == "user"):
+                        data = mongo.profile.find_one({'email': temp['email']}, {'weight', 'height', 'target_weight'})
+                        if data:
+                            return redirect(url_for('dashboard'))
+                        else:
+                            return redirect(url_for('user_profile'))
+                    elif(temp["role"].lower() == "dietician"):
+
+                        return redirect(url_for('dietician'))
+                    elif(temp["role"].lower() == "trainer"):
+                        return redirect(url_for('trainer'))
+                    elif(temp["role"].lower() == "admin"):
+                        return redirect(url_for('admin'))
+                except KeyError:
+                    session["role"] = "user"
+                    data = mongo.profile.find_one({'email': temp['email']}, {'weight', 'height', 'target_weight'})
+                    if data:
+                        return redirect(url_for('dashboard'))
+                    else:
+                        return redirect(url_for('user_profile'))
+                
             else:
                 flash(
                     'Login Unsuccessful. Please check username and password',
@@ -121,17 +139,16 @@ def register():
         form = RegistrationForm()
         if form.validate_on_submit():
             if request.method == 'POST':
-                username = request.form.get('username')
-                email = request.form.get('email')
-                password = request.form.get('password')
-                mongo.user.insert_one({'name': username, 'email': email, 'pwd': bcrypt.hashpw(
-                    password.encode("utf-8"), bcrypt.gensalt())})
-            flash(f'Account created for {form.username.data}!', 'success')
+                create_user(request.form.get('username'), request.form.get('email'), request.form.get('password'), "user")               
             return redirect(url_for('home'))
     else:
         return redirect(url_for('home'))
     return render_template('register.html', title='Register', form=form)
 
+def create_user(user_name, email, password, user_profile):
+    mongo.user.insert_one({'name': user_name, 'email': email, 'pwd': bcrypt.hashpw(
+                    password.encode("utf-8"), bcrypt.gensalt()), 'profile':user_profile})
+    flash(f'Account created for {user_name}!', 'success')
 
 @app.route("/calories", methods=['GET', 'POST'])
 def calories():
@@ -209,12 +226,33 @@ def user_profile():
                                              'weight': weight,
                                              'goal': goal,
                                              'target_weight': target_weight})
+                    set_dietician(email)
+                    set_trainer(email)
             data = mongo.profile.find_one({'email': email}, {'weight', 'height', 'target_weight'})
             flash(f'User Profile Updated', 'success')
             return render_template('display_profile.html',data=data, status=True, form=form)
     else:
         return redirect(url_for('login'))
     return render_template('user_profile.html', status=True, form=form)
+
+def set_dietician(user_email):
+    #Selects a dietician with least number of users and assigns them to the user.
+    pipeline = [{"$group": {"_id": "$dietician", "count": {"$sum": 1}}}]
+    result = mongo.user.aggregate(pipeline)
+    dietician = min(result, key=lambda item: "count")["_id"]
+    #dietician = mongo.user.find_one({"profile":minimum_count["dietician"]})
+    mongo.user.update_one({'email': user_email},{"$set": {"dietician":dietician}})
+
+def set_trainer(user_email):
+    #Selects a trainer with least number of users and assigns them to the user.
+    pipeline = [{"$group": {"_id": "$trainer", "count": {"$sum": 1}}}]
+    result = mongo.user.aggregate(pipeline)
+    count_list = list()
+    for record in result:
+        count_list.append(record["count"])
+    trainer = min(result, key=lambda item: "count")["_id"]
+    #trainer = mongo.user.find_one({"profile":"trainer"})
+    mongo.user.update_one({'email': user_email},{"$set": {"trainer":trainer}})
 
 
 @app.route("/history", methods=['GET'])
@@ -824,6 +862,131 @@ def workout_suggestions():
     suggestions.append("You must maintain the workout to achive your taget")
 
     return render_template('suggestion.html', title='Suggestion',status=True, data = suggestions)
+
+@app.route('/admin', methods=['GET','POST'])
+def admin():
+    email = session.get('email')
+    if not email:
+        form = RegistrationForm()
+        if form.validate_on_submit():
+            create_user(request.form.get('username'), request.form.get('email'), request.form.get('password'), request.form.get('profile'))
+        user_pipeline = [
+            {
+                '$project': {
+                    'email': 1, 
+                    'role': {
+                        '$ifNull': [
+                            '$role', 'user'
+                        ]
+                    }, 
+                    'name': {
+                        '$ifNull': [
+                            '$name', ''
+                        ]
+                    },
+                    'pwd': 1
+                }
+            }, {
+                '$limit': 50
+            }
+        ]
+        user_data = list(mongo.user.aggregate(user_pipeline).filter())
+    return render_template('admin.html', title='Admin',status=True, form = form, user_data = user_data)
+
+@app.route('/dietician', methods=['GET','POST'])
+def dietician():
+    form = DieticianForm()
+    user_data = None
+    email = session.get('email')    
+    if email is not None:
+        dietician = mongo.user.find_one({'email': email, 'profile':'dietician'},{'active'})
+        if(not dietician['active']):
+            return redirect(url_for('change_password'))
+        #form = UserProfileForm()
+        #if form.validate_on_submit():
+            #email = session.get('email')
+            #if request.method == 'POST':
+        else:
+            '''Gets the Name and other details from the user profile '''
+            user_data_pipeline = [
+                {
+                    '$lookup': {
+                        'from': 'user', 
+                        'localField': 'email', 
+                        'foreignField': 'email', 
+                        'as': 'user_data'
+                    }
+                }, {
+                    '$unwind': '$user_data'
+                }, {
+                    '$project': {
+                        'user_data.name': 1, 
+                        'weight': 1, 
+                        'height': 1, 
+                        'target_weight': 1, 
+                        'email': 1
+                    }
+                }
+            ]
+            user_data = mongo.profile.aggregate(user_data_pipeline)
+            return render_template('dietician.html', title='Dietician',status=True, form = form, user_data = user_data)
+    else:
+        redirect(url_for('login'))
+
+@app.route("/diet_plan", methods=['GET','POST'])
+def diet_plan(row_data):
+    form  = DietPlanForm()
+    user_email = row_data["email"]
+    user_name = row_data["user_data.name"]
+    email = session.get('email')
+    if email is not None:
+        diet_plan = mongo.dietplan.find({'user': user_email, 'dietician': email, "active": True },{"plan"})
+        #for plan in diet_plan:
+        #    meals = list(plan["meals"])
+        #    for meal in meals:
+        return render_template('diet_plan.html', title=f'Diet Plan for {user_name}',status=True, form = form, diet_plan = diet_plan)
+    else:
+        redirect(url_for('login'))
+
+@app.route('/trainer', methods=['GET','POST'])
+def trainer():
+    form = TrainerForm()
+    user_data = None
+    email = session.get('email')    
+    if email is not None:
+        trainer = mongo.user.find_one({'email': email, 'profile':'trainer'},{'active'})
+        if(not trainer['active']):
+            return redirect(url_for('change_password'))
+        #form = UserProfileForm()
+        #if form.validate_on_submit():
+            #email = session.get('email')
+            #if request.method == 'POST':
+        else:
+            '''Gets the Name and other details from the user profile '''
+            user_data_pipeline = [
+                {
+                    '$lookup': {
+                        'from': 'user', 
+                        'localField': 'email', 
+                        'foreignField': 'email', 
+                        'as': 'user_data'
+                    }
+                }, {
+                    '$unwind': '$user_data'
+                }, {
+                    '$project': {
+                        'user_data.name': 1, 
+                        'weight': 1, 
+                        'height': 1, 
+                        'target_weight': 1, 
+                        'email': 1
+                    }
+                }
+            ]
+            user_data = mongo.profile.aggregate(user_data_pipeline)
+            return render_template('trainer.html', title='Trainer',status=True, form = form, user_data = user_data)
+    else:
+        redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0",port=3000)

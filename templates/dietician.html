@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<!-- This block extends the "layout.html" template and defines the content for the new_dashboard page. -->
+
+<div id="dietician-data col-md-12">
+    <!-- This div contains user data and their targets. -->
+    <table title="User Data" class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Height (in cm)</th>
+                <th>Weight (in Kg)</th>
+                <th>Target Weight (in Kg)</th>
+                <th>BMI</th>
+                <th>Calorie Data</th>
+                <th>Diet Plan</th>
+            </tr>
+        </thead>
+        <tbody>            
+            {% for row in user_data %}
+            <!-- Iterate through the 'user_data' list. -->
+            <tr>{{row["user_data.name"]}}</tr>
+            <tr>{{row["height"]}}</tr>
+            <tr>{{row["weight"]}}</tr>
+            <tr>{{row["target_weight"]}}</tr>
+            <tr>{{row["weight"]/((row["height"]/100)^2)}}</tr>
+            <tr><button click="calorie_data($row)" action="/calorie_data" type="button" class="btn btn-more-info">Calorie Data</button></tr>
+            <tr><button click="diet_plan($row)" action="/diet_plan" type="button" class="btn btn-primary">Diet Plan</button></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

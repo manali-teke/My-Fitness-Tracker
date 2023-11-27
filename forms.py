@@ -41,14 +41,16 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
+class ChangePasswordForm(FlaskForm):
+    oldpassword = PasswordField('Old Password', validators=[DataRequired()])
+    newpassword = PasswordField('New Password', validators=[DataRequired()])
+    confirmpassword = StringField('Confirm Password', validators=[DataRequired()])
+    submit = SubmitField('Change_Password')
+
 
 class CalorieForm(FlaskForm):
-    app = App()
-      
+    app = App()      
     mongo = Mongo().mongoClient
-    
-
-    print(mongo.command('ping'))
     cursor = mongo.food.find()
     get_docs = []
     for record in cursor:
@@ -57,7 +59,6 @@ class CalorieForm(FlaskForm):
     result = []
     temp = ""
     for i in get_docs:
-        print(i)
         temp = i['Food'] + ' (' + i['Calories'] + ')'
         result.append((temp, temp))
 
@@ -104,3 +105,48 @@ class ResetPasswordForm(FlaskForm):
         'Confirm Password', validators=[
             DataRequired(), EqualTo('password')])
     submit = SubmitField('Reset')
+
+class DietPlanForm(FlaskForm):
+    app = App()      
+    mongo = Mongo().mongoClient
+    cursor = mongo.food.find()
+    get_docs = []
+    for record in cursor:
+        get_docs.append(record)
+
+    food_result = []
+    temp = ""
+    for i in get_docs:
+        temp = i['Food'] + ' (' + i['Calories'] + ')'
+        food_result.append((temp, temp))
+    food = SelectField(
+        'Select Food', choices=food_result)
+    
+    cursor = mongo.mealtype.find()
+    get_docs = []
+    for record in cursor:
+        get_docs.append(record)
+
+    meal_type_result = []
+    temp = ""
+    for i in get_docs:
+        meal_type_result.append(i['mealtype'])
+    mealtype = SelectField(
+        'Select Meal Type', choices=meal_type_result)
+    submit = SubmitField('Save')
+
+class AdminForm(FlaskForm):
+    name = StringField('name',
+                           validators=[DataRequired(), Length(min=2, max=20)])
+    email = StringField('Email',
+                        validators=[DataRequired(), Email()])
+    roles = [ "dietician", "trainer" ]
+    role = SelectField(
+        'Role', choices=roles)
+    submit = SubmitField('Save')
+
+class DieticianForm(FlaskForm):
+    submit = SubmitField('Save')
+
+class TrainerForm(FlaskForm):
+    submit = SubmitField('Save')

@@ -8,7 +8,7 @@ from flask import render_template, session, url_for, flash, redirect, request, F
 from flask_mail import Mail
 from flask_pymongo import PyMongo
 
-from forms import RegistrationForm, LoginForm, UserProfileForm
+from forms import RegistrationForm, LoginForm, UserProfileForm, ChangePasswordForm
 
 app = Flask(__name__)
 app.secret_key = 'secret'
@@ -108,44 +108,41 @@ def register():
         return redirect(url_for('home'))
     return render_template('register.html', title='Register', form=form)
 
-"""
-@app.route("/calories", methods=['GET', 'POST'])
-def calories():
-    # ############################
-    # calorie() function displays the Calorieform (calories.html) template
-    # route "/calories" will redirect to calories() function.
-    # CalorieForm() called and if the form is submitted then various values are fetched and updated into the database entries
-    # Input: Email, date, food, burnout
-    # Output: Value update in database and redirected to home page
-    # ##########################
-    now = datetime.now()
-    now = now.strftime('%Y-%m-%d')
-
-    get_session = session.get('email')
-    if get_session is not None:
-        form = CalorieForm()
+@app.route("/change_password", methods=['GET', 'POST'])
+def change_password():
+    """"
+    change_password() function displays the ChangePassword form (change_password.html) template
+    route "/change_password" will redirect to change_password() function.
+    ChangePasswordForm() called and if the form is submitted then various values are fetched and verified from the database entries
+    Input: OldPassword, NewPassword, ConfirmPassword
+    Output: Updating password and redirecting to Login
+    """
+    email = session.get('email')
+    if email is not None:
+        form = ChangePasswordForm()
         if form.validate_on_submit():
             if request.method == 'POST':
-                email = session.get('email')
-                food = request.form.get('food')
-                cals = food.split(" ")
-                cals = int(cals[1][1:len(cals[1]) - 1])
-                burn = request.form.get('burnout')
-
-                temp = mongo.db.calories.find_one({'email': email}, {
-                    'email', 'calories', 'burnout'})
-                if temp is not None:
-                    mongo.db.calories.update({'email': email}, {'$set': {
-                                             'calories': temp['calories'] + cals, 'burnout': temp['burnout'] + int(burn)}})
+                temp = mongo.db.user.find_one({'email': email}, {
+                    'email', 'pwd'})
+                if temp is not None and temp['email'] == email and (
+                    bcrypt.checkpw(
+                        form.oldpasswordpassword.data.encode("utf-8"),
+                        temp['pwd']) or temp['temp'] == form.oldpassword.data):
+                    if form.newpassword.data == form.confirmpassword.data:
+                        filter = { 'email': email }
+                        newpwd = { "$set": { 'pwd': bcrypt.hashpw(form.newpassword.data.encode("utf-8"), bcrypt.gensalt()), 'active': True } }
+                        mongo.db.user.update_one(filter, newpwd)
+                    flash('Your pasword is successfully updated! Log in with your new password', 'success')
+                    session['email'] = temp['email']
+                    #session['login_type'] = form.type.data
+                    return redirect(url_for('login'))
                 else:
-                    mongo.db.calories.insert(
-                        {'date': now, 'email': email, 'calories': cals, 'burnout': int(burn)})
-                flash(f'Successfully updated the data', 'success')
-                return redirect(url_for('calories'))
+                    flash(
+                        'Could not update your password. Try again.',
+                        'danger')
+                return render_template('register.html', title='Register', form=form)
     else:
-        return redirect(url_for('home'))
-    return render_template('calories.html', form=form, time=now)
-"""
+        return redirect(url_for('login'))
 
 @app.route("/user_profile", methods=['GET', 'POST'])
 def user_profile():

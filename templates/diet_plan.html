@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="">
+        <div class="form-group">
+            {{ form.mealtype.label(class="form-control-label") }}
+            {% if form.mealtype.errors %}
+            {{ form.mealtype(class="form-control form-control-sm is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.mealtype.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.mealtype(class="form-control form-control-sm") }}
+            {% endif %}
+        </div>
+    </form>
+</div>
+
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <div class="row">
+        <div class="col-md-4 col-sm-12 col-xs-12 create-diet-plan pr-2">
+            <form method="POST" onSubmit="saveDietPlan()" name='dietplanform'>
+                <!-- Include hidden fields for form data -->
+                {{ form.hidden_tag() }}
+
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Diet Plan</legend>
+
+                    <div class="form-group">
+                        {{ form.mealtype.label(class="form-control-label") }}
+                        {{ form.mealtype(class="form-control form-control-sm") }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.food.label(class="form-control-label") }}
+                        {{ form.food(class="form-control form-control-sm") }}
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" click="add_meal()"></button>
+                    </div>
+                </fieldset>
+
+                <div class="form-group">
+                    <!-- Submit button for the form -->
+                    {{ form.submit(class="btn btn-more-info") }}
+                </div>
+        </div>
+        <div class="col-md-8 col-sm-12 col-xs-12 show-diet-plan pl-2">
+            {% for plan in diet_plan %}
+            <table class="table">
+                <thead>                    
+                    <tr>
+                        {% for day in plan["day"] %}
+                        <th>{{day}}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for meal in list(plan["meals"]) %}
+                    <tr>
+                        {% for day in plan["day"] %}
+                        <td>
+                            <div class="row">{{ meal['mealtype']}}</div>
+                            <div class="row">{{ meal['food']}}</div>                            
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endfor %}
+        </div>
+    </div>
+    
+    </form>
+</div>
+{% endblock content %}
