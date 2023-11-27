@@ -4,6 +4,10 @@ import plotly.express as px
 import plotly.graph_objects as go
 from bson import ObjectId
 
+import plotly.io as pio
+import io
+import base64
+
 import bcrypt
 import smtplib
 
@@ -313,14 +317,56 @@ def ajaxhistory():
     if get_session is not None:
         if request.method == "POST":
             date = request.form.get('date')
+            print("Received date:", date)
             res = mongo.calories.find_one({'email': email, 'date': date}, {
                                              'date', 'email', 'calories', 'burnout'})
             if res:
+                print("Response:", res)
                 return json.dumps({'date': res['date'], 'email': res['email'], 'burnout': res['burnout'], 'calories': res['calories']}), 200, {
                     'ContentType': 'application/json'}
             else:
+                print("No data found for the date.")
                 return json.dumps({'date': "", 'email': "", 'burnout': "", 'calories': ""}), 200, {
                     'ContentType': 'application/json'}
+
+# @app.route("/ajaxhistory", methods=['POST'])
+# def ajaxhistory():
+#     # ############################
+#     # ajaxhistory() is a POST function displays the fetches the various information from database
+#     # route "/ajaxhistory" will redirect to ajaxhistory() function.
+#     # Details corresponding to given email address are fetched from the database entries
+#     # Input: Email, date
+#     # Output: date, email, calories, burnout
+#     # ##########################
+#     email = get_session = session.get('email')
+#     print(email)
+#     if get_session is not None:
+#         if request.method == "POST":
+#             date = request.form.get('date')
+#             print("Received date:", date)
+#             res = mongo.calories.find_one({'email': email, 'date': date}, {
+#                                              'date', 'email', 'calories', 'burnout'})
+#             if res:
+#                 print("Response:", res)
+#                         # Create a pie chart using Plotly
+#                 total_calories =res['calories']
+#                 burnout = res['burnout']
+#                 burnout_percentage = (burnout / total_calories) * 100
+#                 calories_burnout_percentage = 100 - burnout_percentage
+
+#                 # Create a Plotly pie chart
+#                 lab = ['Burnout', 'Remainder Calories']
+#                 vals = [burnout_percentage, calories_burnout_percentage]
+
+#                 pie_chart = px.pie(values=vals,names=lab )
+#                 pie_html = pie_chart.to_html(full_html=False)
+#                 #print(pie_html)
+#                 return json.dumps({'date': res['date'], 'email': res['email'], 'burnout': res['burnout'], 'calories': res['calories'], 'graph_html': pie_html}), 200, {
+#                     'ContentType': 'application/json'}
+#             else:
+#                 print("No data found for the date.")
+#                 return json.dumps({'date': "", 'email': "", 'burnout': "", 'calories': ""}), 200, {
+#                     'ContentType': 'application/json'}
 
 
 @app.route("/friends", methods=['GET', 'POST'])
