@@ -57,7 +57,7 @@ My Fitness Tracker is a user-friendly programme that tracks the number of calori
 
 # Table of Contents  
 
-- [Why use BurnOut?](#why-use-burnout)
+- [Why use MyFitnessTracker?](#why-use-burnout)
 - [Implementation](#implementation)
 - [TechStack Used for the Development of Project:](#techstack-used-for-the-development-of-project)
 - [Core Functionalities of the Application:](#core-functionalities)
@@ -76,7 +76,7 @@ My Fitness Tracker is a user-friendly programme that tracks the number of calori
 - [License](#license)
 
 
-# Why use BurnOut?
+# Why use MyFitnessTracker?
  - User can keep a track of their calorie intake.
  - User just needs to input the food they've had, calories get calculated automatically.
  - Displays a record of calories in and calories burnt out day wise in History tab.
@@ -87,7 +87,7 @@ My Fitness Tracker is a user-friendly programme that tracks the number of calori
 
 # Implementation
 
-Link to the implementation video of the BurnOut application:
+Link to the implementation video of the MyFitnessTracker application:
 
 
 
