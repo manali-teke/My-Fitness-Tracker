@@ -82,6 +82,36 @@ def login():
         title='Login',
         form=form)
 
+@app.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        user = mongo.user.find_one({'email': email})
+        if user:
+            # Generate a unique token and save it to the database
+            reset_token = generate_reset_token()
+            mongo.user.update_one({'email': email}, {'$set': {'reset_token': reset_token}})
+            
+            # Send an email with the reset link
+            send_reset_email(user, reset_token)
+
+            flash('An email with instructions to reset your password has been sent.', 'info')
+            return redirect(url_for('login'))
+        else:
+            flash('Email address not found. Please check and try again.', 'danger')
+
+    return render_template('forgot_password.html', title='Forgot Password')
+
+
+def generate_reset_token():
+    # Implement logic to generate a unique reset token (e.g., using secrets.token_urlsafe())
+    
+    pass
+
+def send_reset_email(user, reset_token):
+    # Implement logic to send an email with the reset link
+    # Include the reset link in the email body, containing the reset token
+    pass
 
 @app.route("/logout", methods=['GET', 'POST'])
 def logout():
