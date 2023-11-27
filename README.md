@@ -97,6 +97,7 @@ Link to the implementation video of the MyFitnessTracker application:
  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg" alt="mongo" width="20" height="20"/> MongoDB </br>
  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-plain.svg" alt="html" width="20" height="20"> CSS3 </br>
  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-plain.svg" alt="css" width="20" height="20">  HTML 5 </br>
+ <img src="https://cdn-icons-png.flaticon.com/512/919/919853.png" alt="docker" width="20" height="20">  Docker </br>
  
 # Core Functionalities of the Application
  
