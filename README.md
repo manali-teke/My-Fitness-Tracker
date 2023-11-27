@@ -194,15 +194,16 @@ Link to the implementation video of the MyFitnessTracker application:
   # Source Code
   
   Link to the repository:
-  https://github.com/chaithanyaMarripati/calorieApp_server
+  https://github.com/manali-teke/My-Fitness-Tracker/
   
   # Enhancements
 
-   1. Dockerise the server.
-   2. Host the MongoDb instance in cloud.
-   3. Workout suggestion feature
-   4. Added search functionality to add friends
-   5. Bug Fixes
+   1. Added Graphs to visualise weight
+   2. Added Pie charts
+   3. Added Wellness Data Form
+   4. Added Review Functionality
+   5. Added Favorite Functionality
+   6. Bug Fixes
 
    # Future Scope
    1. Integrating ML model to give out personalised workout suggestions.
