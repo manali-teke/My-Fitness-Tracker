@@ -101,27 +101,15 @@ def logout():
     session.clear()
     return "success"
 
-@app.route("/display_profile", methods=['GET', 'POST'])
-def display_profile():
-    """
-    display_profile() function displays the user profile
-    route "/display_profile" will redirect to display_profile() function.
-    display_profile() called and if the form is submitted then various values are fetched and updated into the database entries
-    Input: Email
-    Output: all user data
-    """
+@app.route("/wellness_analysis", methods=['POST'])
+def wellness_analysis():
     now = datetime.now()
     now = now.strftime('%Y-%m-%d')
 
     if session.get('email'):
         email = session.get('email')
-        #data = mongo.profile.find_one({'email': email}, {'weight', 'height', 'target_weight'})
-
-        user_data = mongo.profile.find_one({'email': email})
         my_wellness_data = mongo.wellness_data.find({'email': email})
         my_wellness_data_list = list(my_wellness_data)
-        print(my_wellness_data_list)
-        #print(wellness_data)
 
         # Get dates for the wellness data
         dates_wellness_data = [entry['date'] for entry in my_wellness_data_list]
@@ -145,7 +133,32 @@ def display_profile():
         graph_html_sleep = fig_sleep.to_html(full_html=False)
         graph_html_steps = fig_steps.to_html(full_html=False)
         graph_html_water = fig_water.to_html(full_html=False)
+        return render_template('wellness_analysis.html',graph_html_sleep=graph_html_sleep,graph_html_steps=graph_html_steps,graph_html_water=graph_html_water, )
+    else:
+        return redirect(url_for('login'))
 
+    
+@app.route("/display_profile", methods=['GET', 'POST'])
+def display_profile():
+    """
+    display_profile() function displays the user profile
+    route "/display_profile" will redirect to display_profile() function.
+    display_profile() called and if the form is submitted then various values are fetched and updated into the database entries
+    Input: Email
+    Output: all user data
+    """
+    now = datetime.now()
+    now = now.strftime('%Y-%m-%d')
+
+    if session.get('email'):
+        email = session.get('email')
+        #data = mongo.profile.find_one({'email': email}, {'weight', 'height', 'target_weight'})
+
+        user_data = mongo.profile.find_one({'email': email})
+        my_wellness_data = mongo.wellness_data.find({'email': email})
+        my_wellness_data_list = list(my_wellness_data)
+        print(my_wellness_data_list)
+        #print(wellness_data)
         target_weight=float(user_data['target_weight'])
         user_data_hist = list(mongo.profile.find({'email': email}))
         #print(user_data_hist)
@@ -178,7 +191,7 @@ def display_profile():
                 graph_html = fig.to_html(full_html=False)
 
                 last_10_entries = sorted_user_data_hist[-10:]
-                return render_template('display_profile.html', status=True, user_data=user_data, my_wellness_data=my_wellness_data_list, graph_html=graph_html,graph_html_sleep=graph_html_sleep,graph_html_steps=graph_html_steps,graph_html_water=graph_html_water, last_10_entries=last_10_entries)
+                return render_template('display_profile.html', status=True, user_data=user_data, my_wellness_data=my_wellness_data_list, graph_html=graph_html,last_10_entries=last_10_entries)
                 #return render_template('display_profile.html', status=True, user_data=user_data, graph_html=graph_html, last_10_entries=last_10_entries)
         else:
             flash(f'no 10 entries')

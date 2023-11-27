@@ -76,14 +76,14 @@
         <div>
             <!-- {{ graph_html|safe }} -->
 
-            <h2 style="color: black;">My Sleep Analysis</h2>
+            <!-- <h2 style="color: black;">My Sleep Analysis</h2>
             {{ graph_html_sleep|safe }}
 
             <h2 style="color: black;">My Steps Analysis</h2>
             {{ graph_html_steps|safe }}
 
             <h2 style="color: black;">My Hydration Analysis</h2>
-            {{ graph_html_water|safe }}
+            {{ graph_html_water|safe }} -->
 
             <h2 style="color: black;">Wellness Summary</h2>
             
@@ -113,6 +113,13 @@
         </div>
 
 
+    </div>
+</section>
+<section class="container-fluid">
+    <div class="container site-section" id="yoga-1">
+        <form method="post" action="{{ url_for('wellness_analysis') }}">
+            <button type="submit" class="btn btn-primary">View Wellness Analysis</button>
+        </form>
     </div>
 </section>
 <section class="container-fluid">
