@@ -54,3 +54,5 @@ Does your software describe how a user can get help with using your software? |	
 Does your website and documentation describe what support, if any, you provide to users and developers? |	Yes | 	
 Does your project have an e-mail address or forum that is solely for supporting users? |	Yes | 	
 Are e-mails to your support e-mail address received by more than one person? |	Yes |	
+Does your project have a ticketing system to manage bug reports and feature requests? |	Yes | 	Users can report bugs by opening new issue in GH.
+Is your project's ticketing system publicly visible to your users, so they can view bug reports and feature requests? |	Yes |
