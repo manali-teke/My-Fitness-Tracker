@@ -25,3 +25,5 @@ Use of code coverage |	2 |	travis.yml and codecoverage badge - [GH Repo](https:/
 Other automated analysis tools |	 |	 [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
 Test cases exist |	 |	Test cases in test directory - [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main) |
 Test cases are routinely executed |	 |	 - [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main) |
+The files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up |	3 | [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/CONTRIBUTING.md) |
+Issues are discussed before they are closed |	1 | 	No discussions seen in issue thread - [GH discussions](https://github.com/manali-teke/My-Fitness-Tracker/issues)| 
