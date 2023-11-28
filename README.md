@@ -153,7 +153,8 @@ Link to the implementation video of the BurnOut application:
  ## More info page
  ![More info page on Yoga](https://github.com/chaithanyaMarripati/calorieApp_server/assets/143281993/882645fd-babf-4962-9af6-ed11e14ae74f)
 
-
+ ## Graphs for weight data analysis
+ ![Graphs for weight data analysis](images/weight_analysis.jpeg)
 
 
 
