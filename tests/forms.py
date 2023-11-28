@@ -5,7 +5,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.fields.core import DateField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from apps import App
+from apps import App,Mongo
+import re
 
 
 class RegistrationForm(FlaskForm):
@@ -17,15 +18,36 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField(
         'Confirm Password', validators=[
             DataRequired(), EqualTo('password')])
+    weight = StringField(
+        'Weight', validators=[
+            DataRequired(), Length(
+                min=2, max=20)])
+    height = StringField(
+        'Height', validators=[
+            DataRequired(), Length(
+                min=2, max=20)])
+    goal = StringField(
+        'Goal (Weight Loss/ Muscle Gain)', validators=[
+            DataRequired(), Length(
+                min=2, max=20)])
+    target_weight = StringField(
+        'Target Weight', validators=[
+            DataRequired(), Length(
+                min=2, max=20)])
     submit = SubmitField('Sign Up')
 
     def validate_email(self, email):
-        app_object = App()
-        mongo = app_object.mongo
-
-        temp = mongo.db.user.find_one({'email': email.data}, {'email', 'pwd'})
+        mongo = Mongo().mongoClient
+         
+        temp = mongo.user.find_one({'email': email.data}, {'email', 'pwd'})
         if temp:
             raise ValidationError('Email already exists!')
+    def validate_password(self, password):
+        password_value = password.data
+
+        if len(password_value) < 8 or not re.search(r'[A-Z]', password_value) or not re.search(r'[a-z]', password_value) or not re.search(r'\d', password_value) or not re.search(r'[!@#$%^&*]', password_value):
+            password.data = None
+            raise ValidationError('Password must be least 8 characters long and must contain at least 1 uppercase, lowercase, digit and special character.')
 
 
 class LoginForm(FlaskForm):
@@ -35,13 +57,11 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
-    """
-
+#Creates form for user to enter calorie information
 class CalorieForm(FlaskForm):
     app = App()
-    mongo = app.mongo
-
-    cursor = mongo.db.food.find()
+    mongo = Mongo().mongoClient
+    cursor = mongo.food.find()
     get_docs = []
     for record in cursor:
         get_docs.append(record)
@@ -49,7 +69,7 @@ class CalorieForm(FlaskForm):
     result = []
     temp = ""
     for i in get_docs:
-        temp = i['food'] + ' (' + i['calories'] + ')'
+        temp = i['Food'] + ' (' + i['Calories'] + ')'
         result.append((temp, temp))
 
     food = SelectField(
@@ -58,8 +78,12 @@ class CalorieForm(FlaskForm):
     burnout = StringField('Burn Out', validators=[DataRequired()])
     submit = SubmitField('Save')
 
-"""
-    
+class WellnessDataForm(FlaskForm):
+    sleep_hours = StringField('Todays\'s Sleep Hours', validators=[DataRequired(), Length(min=1, max=20)])
+    steps = StringField('Todays\'s Total Steps', validators=[DataRequired(), Length(min=1, max=20)])
+    water_intake = StringField('Todays\'s Water Intake', validators=[DataRequired(), Length(min=1, max=20)])
+    mood = StringField('Mood', validators=[DataRequired(), Length(min=2, max=20)])
+    submit = SubmitField('Save Wellness Data')
     
 class UserProfileForm(FlaskForm):
     weight = StringField(
@@ -80,20 +104,30 @@ class UserProfileForm(FlaskForm):
                 min=2, max=20)])
     submit = SubmitField('Save Profile')
 
-"""
+
+#Creates form for user to fetch history
 class HistoryForm(FlaskForm):
     app = App()
-    mongo = app.mongo
     date = DateField()
     submit = SubmitField('Fetch')
 
+class ReviewForm(FlaskForm):
+    """Form to input the different reviews about the application"""
+    review = StringField(
+        'Review', validators=[
+            DataRequired(), Length(
+                min=2, max=200)])
+    name = StringField(
+        'Name', validators=[
+            DataRequired(), Length(
+                min=2, max=200)])
+    submit = SubmitField('Submit')
 
 class EnrollForm(FlaskForm):
     app = App()
-    mongo = app.mongo
     submit = SubmitField('Enroll')
-"""
 
+#Creates form for user to reset password
 class ResetPasswordForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField(
