@@ -25,8 +25,8 @@
 <a href="https://github.com/chaithanyaMarripati/calorieApp_server/issues" target="blank">
 <img src="https://img.shields.io/github/issues/chaithanyaMarripati/calorieApp_server?style=flat-square" alt="calorieApp_server issues"/>
 </a>
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/issues" target="blank">
-<img src="https://img.shields.io/github/issues-closed/chaithanyaMarripati/calorieApp_server" alt="calorieApp_server issues closed"/>
+<a href="https://github.com/manali-teke/My-Fitness-Tracker/issues" target="blank" alt="issues closed">
+<img src="https://img.shields.io/github/issues-closed/manali-teke/My-Fitness-Tracker" alt="calorieApp_server issues closed"/>
 </a>
 <a href="https://github.com/manali-teke/My-Fitness-Tracker/pulls" target="blank">
 <img src="https://img.shields.io/github/issues-pr/manali-teke/My-Fitness-Tracker?style=flat-square" alt="cheapBuy pull-requests"/>
