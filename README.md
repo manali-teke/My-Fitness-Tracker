@@ -44,7 +44,7 @@
 <img src="https://img.shields.io/github/discussions/chaithanyaMarripati/calorieApp_server" /></a> 
 
 <a href="https://img.shields.io/github/repo-size/manali-teke/My-Fitness-Tracker" alt="repo size">
-<img src="https://img.shields.io/github/repo-size/chaithanyaMarripati/calorieApp_server" /></a>
+<img src="https://img.shields.io/github/repo-size/manali-teke/My-Fitness-Tracker" /></a>
 
 
 
