@@ -18,5 +18,7 @@
 |Docs: why- docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing |	3 | 	Used quotes and video to sell their product - [GH Readme](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/README.md)|
 Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.| 	0 |	 |
 Use of version control tools| 	3 | 	Effectively leveraged all the functionalities offered by GH - [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
-Use of style checkers|	2 | 	pylintrc, pycodestyle.config style checker files present but workflow has no runs yet - [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
-Use of code formatters |	2 |	PycharmStyleSyntax.xml format checker  files present but workflow has no runs yet - [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
+Use of style checkers|	2 | 	pylintrc, pycodestyle.config style checker files present but workflow has no runs yet [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
+Use of code formatters |	2 |	PycharmStyleSyntax.xml format checker  files present  [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
+Use of syntax checkers.|	2 |	PycharmStyleSyntax.xml format checker files present [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
+Use of code coverage |	2 |	travis.yml and codecoverage badge - [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
