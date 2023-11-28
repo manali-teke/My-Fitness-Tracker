@@ -21,9 +21,7 @@ from flask_pymongo import PyMongo
 from tabulate import tabulate
 from forms import HistoryForm, RegistrationForm, LoginForm, CalorieForm, UserProfileForm, EnrollForm, WellnessDataForm, ReviewForm
 from apps import Mongo
-import schedule
 from threading import Thread
-import time
 
 app = Flask(__name__)
 app.secret_key = 'secret'
