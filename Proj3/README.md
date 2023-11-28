@@ -51,3 +51,6 @@ Do you provide troubleshooting information that describes the symptoms and step-
 If your software can be used as a library, package or service by other software, do you provide comprehensive API documentation? |	NA |	
 Do you store your documentation under revision control with your source code? |	Yes |	
 Does your software describe how a user can get help with using your software? |	Yes | 	
+Does your website and documentation describe what support, if any, you provide to users and developers? |	Yes | 	
+Does your project have an e-mail address or forum that is solely for supporting users? |	Yes | 	
+Are e-mails to your support e-mail address received by more than one person? |	Yes |	
