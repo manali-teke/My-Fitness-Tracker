@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block content %}
+<html>
+  
+<div class="content-section">
+    <form method="POST" action="" name="WellnessDataForm()">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Wellness Data</legend>
+            <div class="form-group">
+
+                {{ form.sleep_hours.label(class="form-control-label") }} 
+                {% if form.sleep_hours.errors %}
+                    {{ form.sleep_hours(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.sleep_hours.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.sleep_hours(class="form-control form-control-lg") }}
+                {% endif %}
+
+                {{ form.steps.label(class="form-control-label") }} 
+                {% if form.steps.errors %}
+                    {{ form.steps(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.steps.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.steps(class="form-control form-control-lg") }}
+                {% endif %}
+
+                {{ form.water_intake.label(class="form-control-label") }} (glasses)
+                {% if form.water_intake.errors %}
+                    {{ form.water_intake(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.water_intake.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.water_intake(class="form-control form-control-lg") }}
+                {% endif %}
+
+                {{ form.mood.label(class="form-control-label") }} (Happy/Sad/Neutral/Depressed)
+                {% if form.mood.errors %}
+                    {{ form.mood(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.mood.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.mood(class="form-control form-control-lg") }}
+                {% endif %}
+
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>  
+    </form>
+</div>
+</html>
+{% endblock content %}

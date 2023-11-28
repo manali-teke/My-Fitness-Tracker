@@ -9,11 +9,11 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![Build Status](https://app.travis-ci.com/atharva1996/calorieApp_server.svg?branch=main)](https://app.travis-ci.com/atharva1996/calorieApp_server)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/chaithanyaMarripati/calorieApp_server/main)
-![total lines](https://img.shields.io/tokei/lines/github/chaithanyaMarripati/calorieApp_server)
-![github workflow](https://github.com/chaithanyaMarripati/calorieApp_server/actions/workflows/unit_test.yml/badge.svg)
-![github workflow](https://github.com/chaithanyaMarripati/calorieApp_server/actions/workflows/style_checker.yml/badge.svg)
-![github workflow](https://github.com/chaithanyaMarripati/calorieApp_server/actions/workflows/syntax_checker.yml/badge.svg)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/manali-teke/My-Fitness-Tracker/main)
+![total lines](https://img.shields.io/tokei/lines/github/manali-teke/My-Fitness-Tracker)
+![github workflow](https://github.com/manali-teke/My-Fitness-Tracker/actions/workflows/unit_test.yml/badge.svg)
+![github workflow](https://github.com/manali-teke/My-Fitness-Tracker/actions/workflows/style_checker.yml/badge.svg)
+![github workflow](https://github.com/manali-teke/My-Fitness-Tracker/actions/workflows/syntax_checker.yml/badge.svg)
 [![codecov](https://codecov.io/gh/chaithanyaMarripati/calorieApp_server/branch/main/graph/badge.svg?token=IQW5PLLE22)](https://codecov.io/gh/deekay2310/calorieApp_server)
 <!--Badges-->
 <a href="https://github.com/chaithanyaMarripati/calorieApp_server/fork" target="blank">
@@ -25,38 +25,39 @@
 <a href="https://github.com/chaithanyaMarripati/calorieApp_server/issues" target="blank">
 <img src="https://img.shields.io/github/issues/chaithanyaMarripati/calorieApp_server?style=flat-square" alt="calorieApp_server issues"/>
 </a>
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/issues" target="blank">
-<img src="https://img.shields.io/github/issues-closed/chaithanyaMarripati/calorieApp_server" alt="calorieApp_server issues closed"/>
+<a href="https://github.com/manali-teke/My-Fitness-Tracker/issues" target="blank" alt="issues closed">
+<img src="https://img.shields.io/github/issues-closed/manali-teke/My-Fitness-Tracker" alt="calorieApp_server issues closed"/>
 </a>
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/pulls" target="blank">
-<img src="https://img.shields.io/github/issues-pr/chaithanyaMarripati/calorieApp_server?style=flat-square" alt="cheapBuy pull-requests"/>
+<a href="https://github.com/manali-teke/My-Fitness-Tracker/pulls" target="blank">
+<img src="https://img.shields.io/github/issues-pr/manali-teke/My-Fitness-Tracker?style=flat-square" alt="cheapBuy pull-requests"/>
 </a>
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/graphs/contributors" alt="Contributors">
-<img src="https://img.shields.io/github/contributors/chaithanyaMarripati/calorieApp_server" /></a>
+<a href="https://github.com/manali-teke/My-Fitness-Tracker/graphs/contributors" alt="Contributors">
+<img src="https://img.shields.io/github/contributors/manali-teke/My-Fitness-Tracker" /></a>
 
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/milestones" alt="milestones">
-<img src="https://img.shields.io/github/milestones/all/chaithanyaMarripati/calorieApp_server" /></a> 
+<a href="https://github.com/manali-teke/My-Fitness-Tracker/milestones" alt="milestones">
+<img src="https://img.shields.io/github/milestones/all/manali-teke/My-Fitness-Tracker" /></a> 
 
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/graphs/commit-activity" alt="commit activity">
-<img src="https://img.shields.io/github/commit-activity/w/chaithanyaMarripati/calorieApp_server" /></a> 
+<a href="https://github.com/manali-teke/My-Fitness-Tracker/graphs/commit-activity" alt="commit activity">
+<img src="https://img.shields.io/github/commit-activity/w/manali-teke/My-Fitness-Tracker" /></a> 
 
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/discussions" alt="discussion">
-<img src="https://img.shields.io/github/discussions/chaithanyaMarripati/calorieApp_server" /></a> 
+<a href="https://github.com/manali-teke/My-Fitness-Tracker/discussions" alt="discussion">
+<img src="https://img.shields.io/github/discussions/manali-teke/My-Fitness-Tracker" /></a> 
 
-<a href="https://img.shields.io/github/repo-size/chaithanyaMarripati/calorieApp_server" alt="repo size">
-<img src="https://img.shields.io/github/repo-size/chaithanyaMarripati/calorieApp_server" /></a>
+<a href="https://img.shields.io/github/repo-size/manali-teke/My-Fitness-Tracker" alt="repo size">
+<img src="https://img.shields.io/github/repo-size/manali-teke/My-Fitness-Tracker" /></a>
 
 
 
-# BurnOut
+# My Fitness Tracker
 
-![WhatsApp Image 2021-09-28 at 2 48 00 PM](https://user-images.githubusercontent.com/25662536/135546154-cfae1d2e-439a-4edc-b0bb-57f693ef5a83.jpeg)
+![MyFitnessTracker](https://github.com/manali-teke/My-Fitness-Tracker/assets/67600147/ef2be463-aca3-44d1-9932-731382e37082)
 
-BurnOut is an easy to use application that keeps track of a user's daily calories gained and burnt. It can help the user to set goals such as weight loss/gain. Users can edit their profile by entering their height, weight, goal and target-weight. Users can enroll into numerous programs involving fitness such as yoga classes and workout sessions. Users can now connect with their friends by sending a friend-request and share their progress. This document provides a major perspective for the users to understand and take up the project as an Open source software and add on multiple features before releasing to the market. Also, the document aids the developers in understanding the code and acts as a reference point for continuing the project. 
+
+My Fitness Tracker is a user-friendly programme that tracks the number of calories burned and gained each day. Setting objectives like weight growth or decrease might be facilitated by it. By inputting their height, weight, goal, and target-weight, users may change their profile. Users may sign up for a variety of fitness-related programmes, including yoga courses and exercise sessions. By extending a friend invitation, users may now stay in touch with their pals and communicate their progress. This article offers a broad overview to help people grasp the project, accept it as open source software, and contribute further features before releasing it onto the public. The document also serves as a reference for the developers while they work on the project and helps them comprehend the code. 
 
 # Table of Contents  
 
-- [Why use BurnOut?](#why-use-burnout)
+- [Why use MyFitnessTracker?](#why-use-myfitnesstracker)
 - [Implementation](#implementation)
 - [TechStack Used for the Development of Project:](#techstack-used-for-the-development-of-project)
 - [Core Functionalities of the Application:](#core-functionalities)
@@ -75,7 +76,7 @@ BurnOut is an easy to use application that keeps track of a user's daily calorie
 - [License](#license)
 
 
-# Why use BurnOut?
+# Why use MyFitnessTracker?
  - User can keep a track of their calorie intake.
  - User just needs to input the food they've had, calories get calculated automatically.
  - Displays a record of calories in and calories burnt out day wise in History tab.
@@ -86,7 +87,7 @@ BurnOut is an easy to use application that keeps track of a user's daily calorie
 
 # Implementation
 
-Link to the implementation video of the BurnOut application:
+Link to the implementation video of the MyFitnessTracker application:
 
 
 
@@ -96,6 +97,7 @@ Link to the implementation video of the BurnOut application:
  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg" alt="mongo" width="20" height="20"/> MongoDB </br>
  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-plain.svg" alt="html" width="20" height="20"> CSS3 </br>
  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-plain.svg" alt="css" width="20" height="20">  HTML 5 </br>
+ <img src="https://cdn-icons-png.flaticon.com/512/919/919853.png" alt="docker" width="20" height="20">  Docker </br>
  
 # Core Functionalities of the Application
  
@@ -192,15 +194,16 @@ Link to the implementation video of the BurnOut application:
   # Source Code
   
   Link to the repository:
-  https://github.com/chaithanyaMarripati/calorieApp_server
+  https://github.com/manali-teke/My-Fitness-Tracker/
   
   # Enhancements
 
-   1. Dockerise the server.
-   2. Host the MongoDb instance in cloud.
-   3. Workout suggestion feature
-   4. Added search functionality to add friends
-   5. Bug Fixes
+   1. Added Graphs to visualise weight
+   2. Added Pie charts
+   3. Added Wellness Data Form
+   4. Added Review Functionality
+   5. Added Favorite Functionality
+   6. Bug Fixes
 
    # Future Scope
    1. Integrating ML model to give out personalised workout suggestions.
@@ -216,10 +219,10 @@ Link to the implementation video of the BurnOut application:
 <center>
   <table>
     <tr>
-      <td align="center"><a href="https://github.com/chaithanyaMarripati">Krishna Chaitanya</a></td>
-      <td align="center"><a href="https://github.com/S-B-Mukesh">S.B.Mukesh</a></td>
-      <td align="center"><a href="https://github.com/subhang51011">Sai Subhang</a></td>
-      <td align="center"><a href="https://github.com/saivikasreddy717">Sai Vikas</a></td>
+      <td align="center"><a href="https://github.com/manali-teke">Manali Teke</a></td>
+      <td align="center"><a href="https://github.com/VaibhaviShetty23">Vaibhavi Shetty</a></td>
+      <td align="center"><a href="https://github.com/adityajson">Aditya Sonar</a></td>
+      <td align="center"><a href="https://github.com/nuttysunday">Shivam Ghodke</a></td>
     </tr>
   </table>
 </center>
