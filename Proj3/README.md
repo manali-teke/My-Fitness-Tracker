@@ -46,3 +46,5 @@ Is your software hosted in an established, third-party repository like GitHub , 
 Is your documentation clearly available on your website or within your software? |	Yes |	
 Does your documentation include a "quick start" guide, that provides a short overview of how to use your software with some basic examples of use? |	Yes |	
 If you provide more extensive documentation, does this provide clear, step-by-step instructions on how to deploy and use your software? |	Yes |	
+Do you provide a comprehensive guide to all your software’s commands, functions and options? |	Yes |	
+Do you provide troubleshooting information that describes the symptoms and step-by-step solutions for problems and error messages? |	Yes | 	
