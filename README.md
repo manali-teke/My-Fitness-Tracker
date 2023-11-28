@@ -162,6 +162,9 @@ Link to the implementation video of the BurnOut application:
  ## Display Wellness Summary
  ![Display Wellness Summary](images/wellness_summary.jpeg)
 
+ ## Graphical representation of calorie history
+ ![Graphical representation of calorie history](images/calorie_history.jpeg)
+
  # Steps for execution
  
  Step 1:
