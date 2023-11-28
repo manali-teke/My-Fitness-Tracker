@@ -37,3 +37,23 @@ Short release cycles |	3 | 	version release history - [GH Repo](https://github.c
 Does your website and documentation provide a clear, high-level overview of your software? |	Yes |	[GH Readme](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/README.md)|
 Does your website and documentation clearly describe the type of user who should use your software? |	Yes |	
 Do you publish case studies to show how your software has been used by yourself and others? |	No |
+Is the name of your project/software unique? |	Yes |	
+Is your project/software name free from trademark violations? |	Yes |	
+Is your software available as a package that can be deployed without building it? |	Yes |	
+Is your software available for free? |	Yes |	
+Is your source code publicly available to download, either as a downloadable bundle or via access to a source code repository? |	Yes |	
+Is your software hosted in an established, third-party repository like GitHub , BitBucket,LaunchPad or SourceForge ? |	Yes |	
+Is your documentation clearly available on your website or within your software? |	Yes |	
+Does your documentation include a "quick start" guide, that provides a short overview of how to use your software with some basic examples of use? |	Yes |	
+If you provide more extensive documentation, does this provide clear, step-by-step instructions on how to deploy and use your software? |	Yes |	
+Do you provide a comprehensive guide to all your software’s commands, functions and options? |	Yes |	
+Do you provide troubleshooting information that describes the symptoms and step-by-step solutions for problems and error messages? |	No | 	
+If your software can be used as a library, package or service by other software, do you provide comprehensive API documentation? |	NA |	
+Do you store your documentation under revision control with your source code? |	Yes |	
+Does your software describe how a user can get help with using your software? |	No | 	
+Does your website and documentation describe what support, if any, you provide to users and developers? |	No | 	
+Does your project have an e-mail address or forum that is solely for supporting users? |	No | 	
+Are e-mails to your support e-mail address received by more than one person? |	NA |	
+Does your project have a ticketing system to manage bug reports and feature requests? |	Yes | 	Users can report bugs by opening new issue in GH.
+Is your project's ticketing system publicly visible to your users, so they can view bug reports and feature requests? |	Yes |
+|Is your software’s architecture and design modular? | 	Yes |	
