@@ -27,7 +27,7 @@ Test cases exist |	 |	Test cases in test directory - [GH repo](https://github.co
 Test cases are routinely executed |	 |	 - [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main) |
 The files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up |	3 | [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/CONTRIBUTING.md) |
 Issues are discussed before they are closed |	1 | 	No discussions seen in issue thread - [GH discussions](https://github.com/manali-teke/My-Fitness-Tracker/issues)| 
-Chat channel: exists |	NA |	-|
+Chat channel: exists | [Image proof](https://github.com/manali-teke/My-Fitness-Tracker/tree/project3_update_readme/Proj3) |	-|
 Test cases: a large proportion of the issues related to handling failing cases |	0 | 	 [GH discussions](https://github.com/manali-teke/My-Fitness-Tracker/issues)| 
 Evidence that the whole team is using the same tools: everyone can get to all tools and files |	3 |	Commit history of files have different contributors  - [GH](https://github.com/manali-teke/My-Fitness-Tracker/pulse) |
 Evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people) |	 3 | 	Commit history - [GH](https://github.com/manali-teke/My-Fitness-Tracker/pulse)|
