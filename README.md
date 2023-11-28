@@ -1,5 +1,5 @@
 # Link to demo/walkthrough video:
-(https://youtu.be/juWO0pcZXzk)
+
 <br>
 <br>
 
