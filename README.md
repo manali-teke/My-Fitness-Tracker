@@ -40,8 +40,8 @@
 <a href="https://github.com/chaithanyaMarripati/calorieApp_server/graphs/commit-activity" alt="commit activity">
 <img src="https://img.shields.io/github/commit-activity/w/chaithanyaMarripati/calorieApp_server" /></a> 
 
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/discussions" alt="discussion">
-<img src="https://img.shields.io/github/discussions/chaithanyaMarripati/calorieApp_server" /></a> 
+<a href="https://github.com/manali-teke/My-Fitness-Tracker/discussions" alt="discussion">
+<img src="https://img.shields.io/github/discussions/manali-teke/My-Fitness-Tracker" /></a> 
 
 <a href="https://img.shields.io/github/repo-size/manali-teke/My-Fitness-Tracker" alt="repo size">
 <img src="https://img.shields.io/github/repo-size/manali-teke/My-Fitness-Tracker" /></a>
