@@ -229,6 +229,8 @@ Link to the implementation video of the MyFitnessTracker application:
    5. Deploy the project to make it accessible to everyone
    6. Change colours for the previous and next buttons on dashboard
    7. Readjust width of each page accordingly
+   8. Create dietician and fitness trainer roles to help users.
+   9. Implement privacy measures.
   
    # Team Members
    
