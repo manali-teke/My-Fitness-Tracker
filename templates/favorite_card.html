@@ -1,0 +1,96 @@
+<div class="col-4">
+    <div class="card"><img class="img-thumbnail" src="{{ exercise.image }}">
+        <div class="card-body">
+            <h4 class="card-title">{{ exercise.name }}</h4>
+            <p class="card-text"><br>&nbsp;{{ exercise.description }}<br><br></p>
+            <button
+            class="btn btn-secondary btn-sm remove-favorite"
+            data-exercise-id="{{exercise.exercise_id}}">Remove</button>                         
+            <a class="btn btn-secondary btn-sm" href="{{ exercise.href }}" role="button">More info</a>
+            <a class="btn btn-secondary btn-sm" href="{{ exercise.video_link }}" role="button">Tutorial</a>
+        </div>
+    </div>
+</div>
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"
+  />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+  <script
+    src="https://kit.fontawesome.com/a076d05399.js"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+
+    // function removeExercise(event){
+    //     const exerciseId = event.target.getAttribute('data-exercise-id');
+    //     // Prepare the data as a JavaScript object
+    //     var requestData = {
+    //       exercise_id: exerciseId,
+    //       action: "remove", // Add or remove based on current state
+    //     };
+    //     // Convert the data to a JSON string
+    //     var jsonData = JSON.stringify(requestData);
+    //     console.log(requestData.action);
+    //     $.ajax({
+    //       type: "POST",
+    //       url: "/add_favorite",
+    //       data: jsonData,
+    //       contentType: "application/json",
+    //       success: function (data) {
+    //         if (data.status === "success") {
+    //           console.log("Removed");
+    //           toastr.error("Removed from Favorites!");
+    //         } else {
+    //           alert("An error occurred while managing favorites.");
+    //           toastr.error("An error occurred while managing favorites.");
+    //         }
+    //       },
+    //       error: function () {
+    //         alert("An error occurred while making the request.");
+    //         toastr.error("An error occurred while making the request.");
+    //       },
+    //     });
+    // }
+    $(document).ready(function () {
+      
+      $(".remove-favorite").on("click", function () {
+        var exerciseId = $(this).data("exercise-id");
+        // var isFavorite = True; // Check if it's marked as a favorite
+
+        var clickedElement = $(this);
+
+        // Prepare the data as a JavaScript object
+        var requestData = {
+          exercise_id: exerciseId,
+          action: "remove", // Add or remove based on current state
+        };
+        // Convert the data to a JSON string
+        var jsonData = JSON.stringify(requestData);
+        console.log(requestData.action);
+        $.ajax({
+          type: "POST",
+          url: "/add_favorite",
+          data: jsonData,
+          contentType: "application/json",
+          success: function (data) {
+            if (data.status === "success") {
+              console.log("Removed");
+              toastr.error("Removed from Favorites!");
+            } else {
+              alert("An error occurred while managing favorites.");
+              toastr.error("An error occurred while managing favorites.");
+            }
+          },
+          error: function () {
+            alert("An error occurred while making the request.");
+            toastr.error("An error occurred while making the request.");
+          },
+        });
+        
+      });
+    });
+  </script>

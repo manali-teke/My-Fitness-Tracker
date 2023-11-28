@@ -18,6 +18,22 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField(
         'Confirm Password', validators=[
             DataRequired(), EqualTo('password')])
+    weight = StringField(
+        'Weight', validators=[
+            DataRequired(), Length(
+                min=2, max=20)])
+    height = StringField(
+        'Height', validators=[
+            DataRequired(), Length(
+                min=2, max=20)])
+    goal = StringField(
+        'Goal (Weight Loss/ Muscle Gain)', validators=[
+            DataRequired(), Length(
+                min=2, max=20)])
+    target_weight = StringField(
+        'Target Weight', validators=[
+            DataRequired(), Length(
+                min=2, max=20)])
     submit = SubmitField('Sign Up')
 
     def validate_email(self, email):
@@ -67,7 +83,13 @@ class CalorieForm(FlaskForm):
     burnout = StringField('Burn Out', validators=[DataRequired()])
     submit = SubmitField('Save')
 
-
+class WellnessDataForm(FlaskForm):
+    sleep_hours = StringField('Todays\'s Sleep Hours', validators=[DataRequired(), Length(min=1, max=20)])
+    steps = StringField('Todays\'s Total Steps', validators=[DataRequired(), Length(min=1, max=20)])
+    water_intake = StringField('Todays\'s Water Intake', validators=[DataRequired(), Length(min=1, max=20)])
+    mood = StringField('Mood', validators=[DataRequired(), Length(min=2, max=20)])
+    submit = SubmitField('Save Wellness Data')
+    
 class UserProfileForm(FlaskForm):
     weight = StringField(
         'Weight', validators=[
@@ -93,6 +115,17 @@ class HistoryForm(FlaskForm):
     date = DateField()
     submit = SubmitField('Fetch')
 
+class ReviewForm(FlaskForm):
+    """Form to input the different reviews about the application"""
+    review = StringField(
+        'Review', validators=[
+            DataRequired(), Length(
+                min=2, max=200)])
+    name = StringField(
+        'Name', validators=[
+            DataRequired(), Length(
+                min=2, max=200)])
+    submit = SubmitField('Submit')
 
 class EnrollForm(FlaskForm):
     app = App()
