@@ -1,18 +1,29 @@
 from datetime import datetime
 
+import plotly.express as px
+import plotly.graph_objects as go
+from bson import ObjectId
+
+from insert_exercise_data import insertexercisedata
+
+import plotly.io as pio
+import io
+import base64
+
 import bcrypt
 import smtplib
 
-# from apps import App
-from flask import json
-# from utilities import Utilities
+
+from flask import json, jsonify
 from flask import render_template, session, url_for, flash, redirect, request, Flask
 from flask_mail import Mail
 from flask_pymongo import PyMongo
 from tabulate import tabulate
-from forms import HistoryForm, RegistrationForm, LoginForm, CalorieForm, UserProfileForm, EnrollForm
+from forms import HistoryForm, RegistrationForm, LoginForm, CalorieForm, UserProfileForm, EnrollForm, WellnessDataForm, ReviewForm
 from apps import Mongo
-
+import schedule
+from threading import Thread
+import time
 
 app = Flask(__name__)
 app.secret_key = 'secret'
@@ -26,7 +37,7 @@ app.config['MAIL_USERNAME'] = "bogusdummy123@gmail.com"
 app.config['MAIL_PASSWORD'] = "helloworld123!"
 mail = Mail(app)
 
-
+insertexercisedata()
 @app.route("/")
 @app.route("/home")
 def home():
@@ -65,7 +76,6 @@ def login():
                 flash('You have been logged in!', 'success')
                 session['email'] = temp['email']
                 session['name'] = temp['name']
-                #session['login_type'] = form.type.data
                 data = mongo.profile.find_one({'email': temp['email']}, {'weight', 'height', 'target_weight'})
                 if data:
                     return redirect(url_for('dashboard'))
@@ -93,19 +103,191 @@ def logout():
     session.clear()
     return "success"
 
+@app.route("/wellness_analysis", methods=['POST'])
+def wellness_analysis():
+    """
+    wellness_analysis() function displays the graphs for user's wellness data.
+    route "/wellness_analysis" will redirect to wellness_analysis() function.
+    Input: Email
+    Output: graphs of all wellness data
+    """
+    now = datetime.now()
+    now = now.strftime('%Y-%m-%d')
+
+    if session.get('email'):
+        email = session.get('email')
+        my_wellness_data = mongo.wellness_data.find({'email': email})
+        my_wellness_data_list = list(my_wellness_data)
+
+        # Get dates for the wellness data
+        dates_wellness_data = [entry['date'] for entry in my_wellness_data_list]
+
+        # Plot daily sleep hours
+        fig_sleep = go.Figure()
+        fig_sleep.add_trace(go.Scatter(x=dates_wellness_data, y=[float(entry['sleep_hours']) for entry in my_wellness_data_list], mode='lines+markers', name='Sleep Hours'))
+        fig_sleep.update_layout(title='Daily Sleep Hours', xaxis=dict(title='Date'), yaxis=dict(title='Sleep Hours'), showlegend=True)
+
+        # Plot daily steps
+        fig_steps = go.Figure()
+        fig_steps.add_trace(go.Scatter(x=dates_wellness_data, y=[float(entry['steps']) for entry in my_wellness_data_list], mode='lines+markers', name='Steps'))
+        fig_steps.update_layout(title='Daily Steps', xaxis=dict(title='Date'), yaxis=dict(title='Steps'), showlegend=True)
+
+        # Plot daily water intake
+        fig_water = go.Figure()
+        fig_water.add_trace(go.Scatter(x=dates_wellness_data, y=[float(entry['water_intake']) for entry in my_wellness_data_list], mode='lines+markers', name='Water Intake'))
+        fig_water.update_layout(title='Daily Water Intake', xaxis=dict(title='Date'), yaxis=dict(title='No. of glasses'), showlegend=True)
+
+        # Converting to HTML
+        graph_html_sleep = fig_sleep.to_html(full_html=False)
+        graph_html_steps = fig_steps.to_html(full_html=False)
+        graph_html_water = fig_water.to_html(full_html=False)
+        return render_template('wellness_analysis.html',graph_html_sleep=graph_html_sleep,graph_html_steps=graph_html_steps,graph_html_water=graph_html_water, )
+    else:
+        return redirect(url_for('login'))
+
+@app.route("/review", methods=['GET', 'POST'])
+def submit_reviews():
+    # ############################
+    # submit_reviews() function collects and displays the reviews submitted by different users
+    # route "/review" will redirect to submit_review() function which redirects to review.html page.
+    # Reviews are stored into a MongoDB collection and then retrieved immediately
+    # Input: Email
+    # Output: Name, Review
+    # ##########################
+    existing_reviews = mongo.db.reviews.find()
+    if session.get('email'):
+        print("Imhere2")
+        if request.method == 'POST':  # Check if it's a POST request
+            form = ReviewForm(request.form)  # Initialize the form with form data
+            if form.validate_on_submit():
+                print("imehere1")
+                email = session.get('email')
+                user = mongo.db.user.find_one({'email': email})
+                name = request.form.get('name')
+                review = request.form.get('review')  # Correct the field name
+                mongo.db.reviews.insert_one({'name': name, 'review': review})
+                return render_template("review.html", form=form, existing_reviews=existing_reviews)
+        else:
+            form = ReviewForm()  # Create an empty form for GET requests
+        return render_template('review.html', form=form, existing_reviews=existing_reviews)
+    else:
+        return "User not logged in"
+
+@app.route('/add_favorite', methods=['POST'])
+def add_favorite():
+    email = get_session = session.get('email')
+    if session.get('email'):
+        data = request.get_json()
+        exercise_id = data.get('exercise_id')
+        print(exercise_id)
+        action = data.get('action')
+        exercise = mongo.your_exercise_collection.find_one({"exercise_id": exercise_id})
+        print(exercise)
+        if exercise:
+            if action=="add":
+            # Create a new document in the favorites schema (you can customize this schema)
+                favorite = {
+                    "exercise_id":exercise.get("exercise_id"),
+                    "email": email,
+                    "image": exercise.get("image"),
+                    "video_link": exercise.get("video_link"),
+                    "name": exercise.get("name"),
+                    "description": exercise.get("description"),
+                    "href": exercise.get("href")
+                }
+
+            # Insert the exercise into the favorites collection
+                mongo.favorites.insert_one(favorite)
+                return jsonify({"status": "success"})
+            elif action=="remove":
+                print(exercise.get("exercise_id"))
+                print("iamhere1")
+                mongo.favorites.delete_one({"email": email, "exercise_id": exercise.get("exercise_id")})
+                return jsonify({"status": "success"})
+
+
+        else:
+            return jsonify({"status": "error", "message": "Exercise not found"})
+    else:
+        return redirect(url_for('login'))
+
+    return json.dumps({'status': False}), 500, {
+        'ContentType:': 'application/json'
+    }
+
+@app.route('/favorites')
+def favorites():
+    email = session.get('email')
+    if not email:
+        # Redirect the user to the login page or show an error message
+        return redirect(url_for('login'))
+
+    # Query MongoDB to get the user's favorite exercises
+    favorite_exercises = mongo.favorites.find({"email": email})
+
+    return render_template('favorites.html', favorite_exercises=favorite_exercises)
+
+
 @app.route("/display_profile", methods=['GET', 'POST'])
 def display_profile():
     """
-    user_profile() function displays the UserProfileForm (user_profile.html) template
-    route "/user_profile" will redirect to user_profile() function.
-    user_profile() called and if the form is submitted then various values are fetched and updated into the database entries
-    Input: Email, height, weight, goal, Target weight
-    Output: Value update in database and redirected to home login page
+    display_profile() function displays the user profile
+    route "/display_profile" will redirect to display_profile() function.
+    Input: Email
+    Output: all user data
     """
+    now = datetime.now()
+    now = now.strftime('%Y-%m-%d')
+
     if session.get('email'):
         email = session.get('email')
-        data = mongo.profile.find_one({'email': email}, {'weight', 'height', 'target_weight'})
-        return render_template('display_profile.html', title = 'Profile', data=data, status=True)
+        #data = mongo.profile.find_one({'email': email}, {'weight', 'height', 'target_weight'})
+
+        user_data = mongo.profile.find_one({'email': email})
+        my_wellness_data = mongo.wellness_data.find({'email': email})
+        my_wellness_data_list = list(my_wellness_data)
+        print(my_wellness_data_list)
+        #print(wellness_data)
+        target_weight=float(user_data['target_weight'])
+        user_data_hist = list(mongo.profile.find({'email': email}))
+        #print(user_data_hist)
+        if user_data_hist:
+                for entry in user_data_hist:
+                    entry['date'] = datetime.strptime(entry['date'], '%Y-%m-%d').date()
+
+                sorted_user_data_hist = sorted(user_data_hist, key=lambda x: x['date'])
+                dates = [entry['date'] for entry in sorted_user_data_hist]
+                weights = [float(entry['weight']) for entry in sorted_user_data_hist]
+
+                print("Dates:", dates)  # Debugging statement
+                print("Weights:", weights) 
+                fig = go.Figure()
+
+                fig.add_trace(go.Scatter(x=dates, y=weights, mode='lines+markers', name='Weight Progress'))
+                fig.add_trace(go.Scatter(x=dates, y=[target_weight] * len(dates), mode='lines', line=dict(color='green', width=1, dash='dot'), name='Target Weight'))
+
+                fig.update_layout(
+                    title='Weight Progress Over Time',
+                    xaxis=dict(title='Date'),
+                    yaxis=dict(title='Weight'),
+                    showlegend=True,
+                )
+
+                fig.update_yaxes(range=[min(min(weights), target_weight) - 5, max(max(weights), target_weight) + 5])
+                fig.update_xaxes(range=[min(dates), now])
+
+                # Converting to JSON
+                graph_html = fig.to_html(full_html=False)
+
+                last_10_entries = sorted_user_data_hist[-10:]
+                return render_template('display_profile.html', status=True, user_data=user_data, my_wellness_data=my_wellness_data_list, graph_html=graph_html,last_10_entries=last_10_entries)
+                #return render_template('display_profile.html', status=True, user_data=user_data, graph_html=graph_html, last_10_entries=last_10_entries)
+        else:
+            flash(f'no 10 entries')
+            return redirect(url_for('home'))
+    else:
+        return redirect(url_for('login'))
+        #return render_template('display_profile.html', title = 'Profile', data=data, status=True)
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -117,6 +299,9 @@ def register():
     Input: Username, Email, Password, Confirm Password
     Output: Value update in database and redirected to home login page
     """
+    now = datetime.now()
+    now = now.strftime('%Y-%m-%d')
+
     if not session.get('email'):
         form = RegistrationForm()
         if form.validate_on_submit():
@@ -124,8 +309,20 @@ def register():
                 username = request.form.get('username')
                 email = request.form.get('email')
                 password = request.form.get('password')
-                mongo.user.insert_one({'name': username, 'email': email, 'pwd': bcrypt.hashpw(
+                mongo.user.insert({'name': username, 'email': email, 'pwd': bcrypt.hashpw(
                     password.encode("utf-8"), bcrypt.gensalt())})
+            
+                weight = request.form.get('weight')
+                height = request.form.get('height')
+                goal = request.form.get('goal')
+                target_weight = request.form.get('target_weight')
+                temp = mongo.profile.find_one({'email': email, 'date': now}, {'height', 'weight', 'goal', 'target_weight'})
+                mongo.profile.insert({'email': email,
+                                             'date': now,
+                                             'height': height,
+                                             'weight': weight,
+                                             'goal': goal,
+                                             'target_weight': target_weight})
             flash(f'Account created for {form.username.data}!', 'success')
             return redirect(url_for('home'))
     else:
@@ -155,20 +352,9 @@ def calories():
                 email = session.get('email')
                 date = request.form.get('date')
                 food = request.form.get('food')
-                # print(food)
                 cals = food.split(" ")
-                # print(cals)
-                # flash(cals)
-                # print(cals[-1][1:-1:],type(cals[1]))
                 cals = int(cals[-1][1:-1:])
                 burn = request.form.get('burnout')
-
-                # temp = mongo.calories.find_one({'email': email}, {
-                #     'email', 'calories', 'burnout'})
-                # if temp is not None:
-                #     mongo.calories.update({'email': email}, {'$set': {
-                #                              'calories': temp['calories'] + cals, 'burnout': temp['burnout'] + int(burn)}})
-                # else:
                 mongo.calories.insert( {'date': date, 'email': email, 'calories': cals, 'burnout': int(burn)})
                 flash(f'Successfully updated the data', 'success')
                 return redirect(url_for('calories'))
@@ -186,32 +372,37 @@ def user_profile():
     Input: Email, height, weight, goal, Target weight
     Output: Value update in database and redirected to home login page
     """
+    now = datetime.now()
+    now = now.strftime('%Y-%m-%d')
+
     if session.get('email'):
         form = UserProfileForm()
         if form.validate_on_submit():
-            email = session.get('email')
+            print("userProfile form validated");
             if request.method == 'POST':
+                email = session.get('email')
                 weight = request.form.get('weight')
                 height = request.form.get('height')
                 goal = request.form.get('goal')
                 target_weight = request.form.get('target_weight')
-                temp = mongo.profile.find_one({'email': email}, {
+                temp = mongo.profile.find_one({'email': email,'date': now}, {
                     'height', 'weight', 'goal', 'target_weight'})
                 if temp is not None:
-                    mongo.profile.update_one({'email': email},
+                    mongo.profile.update_one({'email': email, 'date': now},
                                             {"$set": {'weight': weight,
                                                       'height': height,
                                                       'goal': goal,
                                                       'target_weight': target_weight}})
                 else:
                     mongo.profile.insert_one({'email': email,
+                                              'date' :now,
                                              'height': height,
                                              'weight': weight,
                                              'goal': goal,
                                              'target_weight': target_weight})
-            data = mongo.profile.find_one({'email': email}, {'weight', 'height', 'target_weight'})
+            #data = mongo.profile.find_one({'email': email}, {'weight', 'height', 'target_weight'})
             flash(f'User Profile Updated', 'success')
-            return render_template('display_profile.html',data=data, status=True, form=form)
+            return redirect(url_for('display_profile'))
     else:
         return redirect(url_for('login'))
     return render_template('user_profile.html', status=True, form=form)
@@ -246,14 +437,45 @@ def ajaxhistory():
     if get_session is not None:
         if request.method == "POST":
             date = request.form.get('date')
+            print("Received date:", date)
             res = mongo.calories.find_one({'email': email, 'date': date}, {
                                              'date', 'email', 'calories', 'burnout'})
             if res:
+                print("Response:", res)
                 return json.dumps({'date': res['date'], 'email': res['email'], 'burnout': res['burnout'], 'calories': res['calories']}), 200, {
                     'ContentType': 'application/json'}
             else:
+                print("No data found for the date.")
                 return json.dumps({'date': "", 'email': "", 'burnout': "", 'calories': ""}), 200, {
                     'ContentType': 'application/json'}
+
+@app.route("/wellness_data", methods=['GET', 'POST'])
+def wellness_data():
+    now = datetime.now()
+    now = now.strftime('%Y-%m-%d')
+
+    if session.get('email'):
+        form = WellnessDataForm()
+        if form.validate_on_submit():
+            print("WellnessData form validated")
+            email = session.get('email')
+            sleep_hours = request.form.get('sleep_hours')
+            steps = request.form.get('steps')
+            water_intake = request.form.get('water_intake')
+            mood = request.form.get('mood')
+         
+            mongo.wellness_data.insert_one({'email': email,
+                                            'date': now,
+                                            'sleep_hours': sleep_hours,
+                                            'steps': steps,
+                                            'water_intake': water_intake,
+                                            'mood': mood})      
+            flash(f'Wellness Data Inserted', 'success')
+            return redirect(url_for('display_profile'))
+        # Render the template with the form instance when form is not valid
+        return render_template('wellness_data.html', status=True, form=form)
+    else:
+        return redirect(url_for('login'))
 
 
 @app.route("/friends", methods=['GET', 'POST'])
@@ -276,8 +498,6 @@ def friends():
 
     for f in myFriends:
         myFriendsList.append(f['receiver'])
-
-    # allUsers = list(mongo.user.find({}, {'name', 'email'}))
 
     sendingemail = request.form.get('email')
     sendingRequest = ""
@@ -466,7 +686,6 @@ def yoga():
                         'success')
             data = fetch()
             return render_template('new_dashboard.html', data = data, form=form)
-            # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('yoga.html', title='Yoga', form=form)
@@ -498,7 +717,6 @@ def swim():
                         'success')
             data = fetch()
             return render_template('new_dashboard.html', data = data, form=form)
-            # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('swim.html', title='Swim', form=form)
@@ -561,7 +779,6 @@ def belly():
                         'success')
             data = fetch()
             return render_template('new_dashboard.html', data = data, form=form)
-            # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('belly.html', title='Belly Burner', form=form)
@@ -624,7 +841,6 @@ def gym():
                         'success')
             data = fetch()
             return render_template('new_dashboard.html', data = data, form=form)
-            # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('gym.html', title='Gym', form=form)
@@ -655,7 +871,6 @@ def walk():
                         'success')
             data = fetch()
             return render_template('new_dashboard.html', data = data, form=form)
-            # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('walk.html', title='Walk', form=form)
@@ -721,28 +936,6 @@ def hrx():
     else:
         return redirect(url_for('dashboard'))
     return render_template('hrx.html', title='HRX', form=form)
-
-# @app.route("/ajaxdashboard", methods=['POST'])
-# def ajaxdashboard():
-#     # ############################
-#     # login() function displays the Login form (login.html) template
-#     # route "/login" will redirect to login() function.
-#     # LoginForm() called and if the form is submitted then various values are fetched and verified from the database entries
-#     # Input: Email, Password, Login Type
-#     # Output: Account Authentication and redirecting to Dashboard
-#     # ##########################
-#     email = get_session = session.get('email')
-#     print(email)
-#     if get_session is not None:
-#         if request.method == "POST":
-#             result = mongo.db.user.find_one(
-#                 {'email': email}, {'email', 'Status'})
-#             if result:
-#                 return json.dumps({'email': result['email'], 'Status': result['result']}), 200, {
-#                     'ContentType': 'application/json'}
-#             else:
-#                 return json.dumps({'email': "", 'Status': ""}), 200, {
-#                     'ContentType': 'application/json'}
 
 # Define a route for BMI calculation and workout suggestions
 @app.route('/workout_suggestions', methods=['GET','POST'])

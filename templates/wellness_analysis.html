@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Wellness Analysis</title>
+    <style>
+        /* Define custom styles for nav-button */
+        .nav-button {
+            border-color: #0dcaf0; /* Set the border color to blue */
+            color: #0dcaf0; /* Set the text color to blue */
+            border-radius: 0.25rem; /* Rounded border edges */
+        }
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Wellness Analysis</h1>
+</body>
+<section class="container-fluid">
+    <div class="container site-section" id="yoga-1">
+        <div>
+            <!-- {{ graph_html|safe }} -->
+
+            <h2 style="color: black;">My Sleep Analysis</h2>
+            {{ graph_html_sleep|safe }}
+
+            <h2 style="color: black;">My Steps Analysis</h2>
+            {{ graph_html_steps|safe }}
+
+            <h2 style="color: black;">My Hydration Analysis</h2>
+            {{ graph_html_water|safe }}
+
+        </div>
+
+
+    </div>
+</section>
+{% endblock content %}

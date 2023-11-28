@@ -25,7 +25,7 @@
                     <img class="img-thumbnail img-fluid" src="../static/img/height.jpg">
                     <div class="card-body">
                         <h4 class="card-title">Your Height</h4>
-                        <p class="card-text">{{ data.height }} cms<br><br></p>
+                        <p class="card-text">{{ user_data.height }} cms<br><br></p>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                     <img class="img-thumbnail img-fluid" src="../static/img/weight.png">
                     <div class="card-body">
                         <h4 class="card-title">Your Weight</h4>
-                        <p class="card-text">{{ data.weight }} Kgs<br><br></p>
+                        <p class="card-text">{{ user_data.weight }} Kgs<br><br></p>
                     </div>
                 </div>
             </div>
@@ -43,18 +43,91 @@
                     <img class="img-thumbnail img-fluid" src="../static/img/weightgoal.jpg">
                     <div class="card-body">
                         <h4 class="card-title">Your Target Weight</h4>
-                        <p class="card-text">{{ data.target_weight }} Kgs<br><br></p>
+                        <p class="card-text">{{ user_data.target_weight }} Kgs<br><br></p>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div>
+
+            <h2 style="color: black;">My Weight Analysis</h2>
+            {{ graph_html|safe }}
+
+            <!-- <h2 style="color: black;">Last 10 Entries</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="color: black;">Date</th>
+                        <th style="color: black;">Weight</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in last_10_entries %}
+                        <tr>
+                            <td style="color: black;">{{ entry['date'] }}</td>
+                            <td style="color: black;">{{ entry['weight'] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table> -->
+        </div>
+
+        <div>
+            <!-- {{ graph_html|safe }} -->
+
+            <!-- <h2 style="color: black;">My Sleep Analysis</h2>
+            {{ graph_html_sleep|safe }}
+
+            <h2 style="color: black;">My Steps Analysis</h2>
+            {{ graph_html_steps|safe }}
+
+            <h2 style="color: black;">My Hydration Analysis</h2>
+            {{ graph_html_water|safe }} -->
+
+            <h2 style="color: black;">Wellness Summary</h2>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="color: black;">Date</th>
+                        <th style="color: black;">Sleep Hours</th>
+                        <th style="color: black;">Total Steps</th>
+                        <th style="color: black;">Water Intake (Glasses)</th>
+                        <th style="color: black;">Mood</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in my_wellness_data %}
+                        <tr>
+                            <td style="color: black;">{{ entry['date'] }}</td>
+                            <td style="color: black;">{{ entry['sleep_hours'] }}</td>
+                            <td style="color: black;">{{ entry['steps'] }}</td>
+                            <td style="color: black;">{{ entry['water_intake'] }}</td>
+                            <td style="color: black;">{{ entry['mood'] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+
     </div>
 </section>
-<center>
-    <button class="nav-button">
-        <a href="{{ url_for('user_profile') }}">Edit</a>
-    </button>
-</center>
+<section class="container-fluid">
+    <div class="container site-section" id="yoga-1">
+        <form method="post" action="{{ url_for('wellness_analysis') }}">
+            <button type="submit" class="btn btn-primary">View Wellness Analysis</button>
+        </form>
+    </div>
+</section>
+<section class="container-fluid">
+    <div class="container site-section" id="yoga-1">
+        <a href="{{ url_for('user_profile') }}" class="btn btn-primary">Update Profile</a>
+        <a href="{{ url_for('wellness_data') }}" class="btn btn-success">Update Wellness data</a>
+    </div>
+</section>
 <br><br>
 </html>
 {% endblock content %}
