@@ -14,9 +14,7 @@ import bcrypt
 import smtplib
 
 
-# from apps import App
 from flask import json, jsonify
-# from utilities import Utilities
 from flask import render_template, session, url_for, flash, redirect, request, Flask
 from flask_mail import Mail
 from flask_pymongo import PyMongo
@@ -78,7 +76,6 @@ def login():
                 flash('You have been logged in!', 'success')
                 session['email'] = temp['email']
                 session['name'] = temp['name']
-                #session['login_type'] = form.type.data
                 data = mongo.profile.find_one({'email': temp['email']}, {'weight', 'height', 'target_weight'})
                 if data:
                     return redirect(url_for('dashboard'))
@@ -355,20 +352,9 @@ def calories():
                 email = session.get('email')
                 date = request.form.get('date')
                 food = request.form.get('food')
-                # print(food)
                 cals = food.split(" ")
-                # print(cals)
-                # flash(cals)
-                # print(cals[-1][1:-1:],type(cals[1]))
                 cals = int(cals[-1][1:-1:])
                 burn = request.form.get('burnout')
-
-                # temp = mongo.calories.find_one({'email': email}, {
-                #     'email', 'calories', 'burnout'})
-                # if temp is not None:
-                #     mongo.calories.update({'email': email}, {'$set': {
-                #                              'calories': temp['calories'] + cals, 'burnout': temp['burnout'] + int(burn)}})
-                # else:
                 mongo.calories.insert( {'date': date, 'email': email, 'calories': cals, 'burnout': int(burn)})
                 flash(f'Successfully updated the data', 'success')
                 return redirect(url_for('calories'))
@@ -512,8 +498,6 @@ def friends():
 
     for f in myFriends:
         myFriendsList.append(f['receiver'])
-
-    # allUsers = list(mongo.user.find({}, {'name', 'email'}))
 
     sendingemail = request.form.get('email')
     sendingRequest = ""
@@ -702,7 +686,6 @@ def yoga():
                         'success')
             data = fetch()
             return render_template('new_dashboard.html', data = data, form=form)
-            # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('yoga.html', title='Yoga', form=form)
@@ -734,7 +717,6 @@ def swim():
                         'success')
             data = fetch()
             return render_template('new_dashboard.html', data = data, form=form)
-            # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('swim.html', title='Swim', form=form)
@@ -797,7 +779,6 @@ def belly():
                         'success')
             data = fetch()
             return render_template('new_dashboard.html', data = data, form=form)
-            # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('belly.html', title='Belly Burner', form=form)
@@ -860,7 +841,6 @@ def gym():
                         'success')
             data = fetch()
             return render_template('new_dashboard.html', data = data, form=form)
-            # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('gym.html', title='Gym', form=form)
@@ -891,7 +871,6 @@ def walk():
                         'success')
             data = fetch()
             return render_template('new_dashboard.html', data = data, form=form)
-            # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
     return render_template('walk.html', title='Walk', form=form)
@@ -957,28 +936,6 @@ def hrx():
     else:
         return redirect(url_for('dashboard'))
     return render_template('hrx.html', title='HRX', form=form)
-
-# @app.route("/ajaxdashboard", methods=['POST'])
-# def ajaxdashboard():
-#     # ############################
-#     # login() function displays the Login form (login.html) template
-#     # route "/login" will redirect to login() function.
-#     # LoginForm() called and if the form is submitted then various values are fetched and verified from the database entries
-#     # Input: Email, Password, Login Type
-#     # Output: Account Authentication and redirecting to Dashboard
-#     # ##########################
-#     email = get_session = session.get('email')
-#     print(email)
-#     if get_session is not None:
-#         if request.method == "POST":
-#             result = mongo.db.user.find_one(
-#                 {'email': email}, {'email', 'Status'})
-#             if result:
-#                 return json.dumps({'email': result['email'], 'Status': result['result']}), 200, {
-#                     'ContentType': 'application/json'}
-#             else:
-#                 return json.dumps({'email': "", 'Status': ""}), 200, {
-#                     'ContentType': 'application/json'}
 
 # Define a route for BMI calculation and workout suggestions
 @app.route('/workout_suggestions', methods=['GET','POST'])
