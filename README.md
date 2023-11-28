@@ -9,11 +9,11 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![Build Status](https://app.travis-ci.com/atharva1996/calorieApp_server.svg?branch=main)](https://app.travis-ci.com/atharva1996/calorieApp_server)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/chaithanyaMarripati/calorieApp_server/main)
-![total lines](https://img.shields.io/tokei/lines/github/chaithanyaMarripati/calorieApp_server)
-![github workflow](https://github.com/chaithanyaMarripati/calorieApp_server/actions/workflows/unit_test.yml/badge.svg)
-![github workflow](https://github.com/chaithanyaMarripati/calorieApp_server/actions/workflows/style_checker.yml/badge.svg)
-![github workflow](https://github.com/chaithanyaMarripati/calorieApp_server/actions/workflows/syntax_checker.yml/badge.svg)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/manali-teke/My-Fitness-Tracker/main)
+![total lines](https://img.shields.io/tokei/lines/github/manali-teke/My-Fitness-Tracker)
+![github workflow](https://github.com/manali-teke/My-Fitness-Tracker/actions/workflows/unit_test.yml/badge.svg)
+![github workflow](https://github.com/manali-teke/My-Fitness-Tracker/actions/workflows/style_checker.yml/badge.svg)
+![github workflow](https://github.com/manali-teke/My-Fitness-Tracker/actions/workflows/syntax_checker.yml/badge.svg)
 [![codecov](https://codecov.io/gh/chaithanyaMarripati/calorieApp_server/branch/main/graph/badge.svg?token=IQW5PLLE22)](https://codecov.io/gh/deekay2310/calorieApp_server)
 <!--Badges-->
 <a href="https://github.com/chaithanyaMarripati/calorieApp_server/fork" target="blank">
@@ -25,26 +25,26 @@
 <a href="https://github.com/chaithanyaMarripati/calorieApp_server/issues" target="blank">
 <img src="https://img.shields.io/github/issues/chaithanyaMarripati/calorieApp_server?style=flat-square" alt="calorieApp_server issues"/>
 </a>
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/issues" target="blank">
-<img src="https://img.shields.io/github/issues-closed/chaithanyaMarripati/calorieApp_server" alt="calorieApp_server issues closed"/>
+<a href="https://github.com/manali-teke/My-Fitness-Tracker/issues" target="blank" alt="issues closed">
+<img src="https://img.shields.io/github/issues-closed/manali-teke/My-Fitness-Tracker" alt="calorieApp_server issues closed"/>
 </a>
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/pulls" target="blank">
-<img src="https://img.shields.io/github/issues-pr/chaithanyaMarripati/calorieApp_server?style=flat-square" alt="cheapBuy pull-requests"/>
+<a href="https://github.com/manali-teke/My-Fitness-Tracker/pulls" target="blank">
+<img src="https://img.shields.io/github/issues-pr/manali-teke/My-Fitness-Tracker?style=flat-square" alt="cheapBuy pull-requests"/>
 </a>
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/graphs/contributors" alt="Contributors">
-<img src="https://img.shields.io/github/contributors/chaithanyaMarripati/calorieApp_server" /></a>
+<a href="https://github.com/manali-teke/My-Fitness-Tracker/graphs/contributors" alt="Contributors">
+<img src="https://img.shields.io/github/contributors/manali-teke/My-Fitness-Tracker" /></a>
 
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/milestones" alt="milestones">
-<img src="https://img.shields.io/github/milestones/all/chaithanyaMarripati/calorieApp_server" /></a> 
+<a href="https://github.com/manali-teke/My-Fitness-Tracker/milestones" alt="milestones">
+<img src="https://img.shields.io/github/milestones/all/manali-teke/My-Fitness-Tracker" /></a> 
 
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/graphs/commit-activity" alt="commit activity">
-<img src="https://img.shields.io/github/commit-activity/w/chaithanyaMarripati/calorieApp_server" /></a> 
+<a href="https://github.com/manali-teke/My-Fitness-Tracker/graphs/commit-activity" alt="commit activity">
+<img src="https://img.shields.io/github/commit-activity/w/manali-teke/My-Fitness-Tracker" /></a> 
 
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/discussions" alt="discussion">
-<img src="https://img.shields.io/github/discussions/chaithanyaMarripati/calorieApp_server" /></a> 
+<a href="https://github.com/manali-teke/My-Fitness-Tracker/discussions" alt="discussion">
+<img src="https://img.shields.io/github/discussions/manali-teke/My-Fitness-Tracker" /></a> 
 
-<a href="https://img.shields.io/github/repo-size/chaithanyaMarripati/calorieApp_server" alt="repo size">
-<img src="https://img.shields.io/github/repo-size/chaithanyaMarripati/calorieApp_server" /></a>
+<a href="https://img.shields.io/github/repo-size/manali-teke/My-Fitness-Tracker" alt="repo size">
+<img src="https://img.shields.io/github/repo-size/manali-teke/My-Fitness-Tracker" /></a>
 
 
 
