@@ -10,7 +10,6 @@
 [![Build Status](https://app.travis-ci.com/atharva1996/calorieApp_server.svg?branch=main)](https://app.travis-ci.com/atharva1996/calorieApp_server)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/manali-teke/My-Fitness-Tracker/main)
-![total lines](https://img.shields.io/tokei/lines/github/manali-teke/My-Fitness-Tracker)
 ![github workflow](https://github.com/manali-teke/My-Fitness-Tracker/actions/workflows/unit_test.yml/badge.svg)
 ![github workflow](https://github.com/manali-teke/My-Fitness-Tracker/actions/workflows/style_checker.yml/badge.svg)
 ![github workflow](https://github.com/manali-teke/My-Fitness-Tracker/actions/workflows/syntax_checker.yml/badge.svg)
@@ -155,9 +154,26 @@ Link to the implementation video of the MyFitnessTracker application:
  ## More info page
  ![More info page on Yoga](https://github.com/chaithanyaMarripati/calorieApp_server/assets/143281993/882645fd-babf-4962-9af6-ed11e14ae74f)
 
+ ## Graphs for weight data analysis
+ ![Graphs for weight data analysis](images/weight_analysis.jpeg)
 
+ ## Save User Wellness Data
+ ![Save User Wellness Data](images/wellness_data.jpeg)
 
+ ## Display Wellness Summary
+ ![Display Wellness Summary](images/wellness_summary.jpeg)
 
+ ## Graphical representation of calorie history
+ ![Graphical representation of calorie history](images/calorie_history.jpeg)
+
+ ## Review Form for users
+ ![Review Form for users](images/review.jpeg)
+
+  ## Add exercises to favorites
+ ![Add exercises to favorites](images/fav_exercise.jpeg)
+
+  ## Remove exercises from Favorites
+ ![Remove exercises from Favorites](images/remove_fav.jpeg)
 
  # Steps for execution
  
