@@ -23,7 +23,13 @@ Use of code formatters |	2 |	PycharmStyleSyntax.xml format checker  files presen
 Use of syntax checkers.|	2 |	PycharmStyleSyntax.xml format checker files present [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
 Use of code coverage |	2 |	travis.yml and codecoverage badge - [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
 Other automated analysis tools |	 |	 [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
-Test cases exist |	 |	Test cases in test directory - [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main) |
+Test cases exist |	 |	Test cases in test directory - [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main/tests) |
 Test cases are routinely executed |	 |	 - [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main) |
 The files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up |	3 | [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/CONTRIBUTING.md) |
 Issues are discussed before they are closed |	1 | 	No discussions seen in issue thread - [GH discussions](https://github.com/manali-teke/My-Fitness-Tracker/issues)| 
+Chat channel: exists |	NA |	-|
+Test cases: a large proportion of the issues related to handling failing cases |	0 | 	 [GH discussions](https://github.com/manali-teke/My-Fitness-Tracker/issues)| 
+Evidence that the whole team is using the same tools: everyone can get to all tools and files |	3 |	Commit history of files have different contributors  - [GH](https://github.com/manali-teke/My-Fitness-Tracker/pulse) |
+Evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people) |	 3 | 	Commit history - [GH]([https://github.com/SEProjGrp5/ScheduleBot](https://github.com/manali-teke/My-Fitness-Tracker/pulse)) |
+Evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer) |	NA |	-|
+Evidence that the members of the team are working across multiple places in the code base |	2 | 	Commits on main branch - [GH Repo]([https://github.com/SEProjGrp5/ScheduleBot](https://github.com/manali-teke/My-Fitness-Tracker/pulse)https://github.com/manali-teke/My-Fitness-Tracker/pulse) |
