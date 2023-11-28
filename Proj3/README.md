@@ -37,3 +37,6 @@ Short release cycles |	3 | 	version release history - [GH Repo](https://github.c
 Does your website and documentation provide a clear, high-level overview of your software? |	Yes |	[GH Readme](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/README.md)|
 Does your website and documentation clearly describe the type of user who should use your software? |	Yes |	
 Do you publish case studies to show how your software has been used by yourself and others? |	No |
+Is the name of your project/software unique? |	Yes |	
+Is your project/software name free from trademark violations? |	Yes |	
+Is your software available as a package that can be deployed without building it? |	No |	
