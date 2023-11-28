@@ -57,7 +57,7 @@ My Fitness Tracker is a user-friendly programme that tracks the number of calori
 
 # Table of Contents  
 
-- [Why use BurnOut?](#why-use-burnout)
+- [Why use MyFitnessTracker?](#why-use-myfitnesstracker)
 - [Implementation](#implementation)
 - [TechStack Used for the Development of Project:](#techstack-used-for-the-development-of-project)
 - [Core Functionalities of the Application:](#core-functionalities)
@@ -76,7 +76,7 @@ My Fitness Tracker is a user-friendly programme that tracks the number of calori
 - [License](#license)
 
 
-# Why use BurnOut?
+# Why use MyFitnessTracker?
  - User can keep a track of their calorie intake.
  - User just needs to input the food they've had, calories get calculated automatically.
  - Displays a record of calories in and calories burnt out day wise in History tab.
@@ -87,7 +87,7 @@ My Fitness Tracker is a user-friendly programme that tracks the number of calori
 
 # Implementation
 
-Link to the implementation video of the BurnOut application:
+Link to the implementation video of the MyFitnessTracker application:
 
 
 
@@ -97,6 +97,7 @@ Link to the implementation video of the BurnOut application:
  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg" alt="mongo" width="20" height="20"/> MongoDB </br>
  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-plain.svg" alt="html" width="20" height="20"> CSS3 </br>
  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-plain.svg" alt="css" width="20" height="20">  HTML 5 </br>
+ <img src="https://cdn-icons-png.flaticon.com/512/919/919853.png" alt="docker" width="20" height="20">  Docker </br>
  
 # Core Functionalities of the Application
  
@@ -193,15 +194,16 @@ Link to the implementation video of the BurnOut application:
   # Source Code
   
   Link to the repository:
-  https://github.com/chaithanyaMarripati/calorieApp_server
+  https://github.com/manali-teke/My-Fitness-Tracker/
   
   # Enhancements
 
-   1. Dockerise the server.
-   2. Host the MongoDb instance in cloud.
-   3. Workout suggestion feature
-   4. Added search functionality to add friends
-   5. Bug Fixes
+   1. Added Graphs to visualise weight
+   2. Added Pie charts
+   3. Added Wellness Data Form
+   4. Added Review Functionality
+   5. Added Favorite Functionality
+   6. Bug Fixes
 
    # Future Scope
    1. Integrating ML model to give out personalised workout suggestions.
