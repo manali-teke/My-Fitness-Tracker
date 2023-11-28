@@ -165,6 +165,15 @@ Link to the implementation video of the BurnOut application:
  ## Graphical representation of calorie history
  ![Graphical representation of calorie history](images/calorie_history.jpeg)
 
+ ## Review Form for users
+ ![Review Form for users](images/review.jpeg)
+
+  ## Add exercises to favorites
+ ![Add exercises to favorites](images/fav_exercise.jpeg)
+
+  ## Remove exercises from Favorites
+ ![Remove exercises from Favorites](images/remove_fav.jpeg)
+
  # Steps for execution
  
  Step 1:
