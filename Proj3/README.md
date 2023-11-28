@@ -8,7 +8,7 @@
 |Video |	3|	A descriptive video explaining new functionalities|
 |Workload is spread over the whole team |	3|	All members have fairly equal contribution - [GH commit history](https://github.com/manali-teke/My-Fitness-Tracker/graphs/contributors) |
 |Number of commits |	|	 [GH commit history](https://github.com/manali-teke/My-Fitness-Tracker/graphs/commit-activity)|
-|Number of commits: by different people  |	3|	Number of commits by each member are in range (14-20)- [GH commit history]((https://github.com/manali-teke/My-Fitness-Tracker/graphs/commit-activity)|
+|Number of commits: by different people  |	3|	Number of commits by each member are in range (14-20)- [GH commit history](https://github.com/manali-teke/My-Fitness-Tracker/graphs/commit-activity)|
 |Issues reports  |	2|	There were 5 issues reported - [GH Issues](https://github.com/manali-teke/My-Fitness-Tracker/issues)|
 |Issues are being closed  |	3|	4/5 issues were closed - [GH Issues](https://github.com/manali-teke/My-Fitness-Tracker/issues)|
 |DOI badge: exists  |	3|	[GH Readme](https://github.com/manali-teke/My-Fitness-Tracker#readme)|
@@ -40,3 +40,9 @@ Do you publish case studies to show how your software has been used by yourself 
 Is the name of your project/software unique? |	Yes |	
 Is your project/software name free from trademark violations? |	Yes |	
 Is your software available as a package that can be deployed without building it? |	No |	
+Is your software available for free? |	Yes |	
+Is your source code publicly available to download, either as a downloadable bundle or via access to a source code repository? |	Yes |	
+Is your software hosted in an established, third-party repository like GitHub , BitBucket,LaunchPad or SourceForge ? |	Yes |	
+Is your documentation clearly available on your website or within your software? |	Yes |	
+Does your documentation include a "quick start" guide, that provides a short overview of how to use your software with some basic examples of use? |	Yes |	
+If you provide more extensive documentation, does this provide clear, step-by-step instructions on how to deploy and use your software? |	Yes |	
