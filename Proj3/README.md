@@ -19,7 +19,7 @@
 Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.| 	0 |	 |
 Use of version control tools| 	3 | 	Effectively leveraged all the functionalities offered by GH - [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
 Use of style checkers|	2 | 	pylintrc, pycodestyle.config style checker files present but workflow has no runs yet [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
-Use of code formatters |	2 |	PycharmStyleSyntax.xml format checker  files present  [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
+Use of code formatters |	3 |	PycharmStyleSyntax.xml format checker  files present  [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
 Use of syntax checkers.|	2 |	PycharmStyleSyntax.xml format checker files present [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
 Use of code coverage |	2 |	travis.yml and codecoverage badge - [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
 Other automated analysis tools |	 |	 [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
@@ -27,7 +27,7 @@ Test cases exist |	 |	Test cases in test directory - [GH repo](https://github.co
 Test cases are routinely executed |	 |	 - [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main) |
 The files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up |	3 | [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/CONTRIBUTING.md) |
 Issues are discussed before they are closed |	1 | 	No discussions seen in issue thread - [GH discussions](https://github.com/manali-teke/My-Fitness-Tracker/issues)| 
-Chat channel: exists | [Image proof](https://github.com/manali-teke/My-Fitness-Tracker/tree/project3_update_readme/Proj3) |	-|
+Chat channel: exists | 3 | [Image proof](https://github.com/manali-teke/My-Fitness-Tracker/tree/project3_update_readme/Proj3) |
 Test cases: a large proportion of the issues related to handling failing cases |	0 | 	 [GH discussions](https://github.com/manali-teke/My-Fitness-Tracker/issues)| 
 Evidence that the whole team is using the same tools: everyone can get to all tools and files |	3 |	Commit history of files have different contributors  - [GH](https://github.com/manali-teke/My-Fitness-Tracker/pulse) |
 Evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people) |	 3 | 	Commit history - [GH](https://github.com/manali-teke/My-Fitness-Tracker/pulse)|
