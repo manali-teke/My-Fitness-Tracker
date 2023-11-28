@@ -6,33 +6,33 @@
 |Notes	|Score|	Evidence|
 | -------- | -------- | -------- |
 |Video |	3|	A descriptive video explaining new functionalities|
-|Workload is spread over the whole team |	3|	All members have fairly equal contribution - [GH commit history](https://github.com/manali-teke/My-Fitness-Tracker/graphs/contributors) |
-|Number of commits |	|	 [GH commit history](https://github.com/manali-teke/My-Fitness-Tracker/graphs/commit-activity)|
-|Number of commits: by different people  |	3|	Number of commits by each member are in range (14-20)- [GH commit history]((https://github.com/manali-teke/My-Fitness-Tracker/graphs/commit-activity)|
-|Issues reports  |	2|	There were 5 issues reported - [GH Issues](https://github.com/manali-teke/My-Fitness-Tracker/issues)|
-|Issues are being closed  |	3|	4/5 issues were closed - [GH Issues](https://github.com/manali-teke/My-Fitness-Tracker/issues)|
+|Workload is spread over the whole team |	3|	All members have fairly equal contribution - [GH commit history](https://github.com/manali-teke/My-Fitness-Tracker/pulse)|
+|Number of commits |	3|	 [GH commit history](https://github.com/manali-teke/My-Fitness-Tracker/graphs/commit-activity)|
+|Number of commits: by different people  |	3|	Number of commits by each member are in range (20-25)- [GH commit history](https://github.com/manali-teke/My-Fitness-Tracker/graphs/commit-activity)|
+|Issues reports  |	3|	There were 6 issues reported - [GH Issues](https://github.com/manali-teke/My-Fitness-Tracker/issues)|
+|Issues are being closed  |	3|	4/6 issues were closed - [GH Issues](https://github.com/manali-teke/My-Fitness-Tracker/issues?q=is%3Aissue+is%3Aclosed)|
 |DOI badge: exists  |	3|	[GH Readme](https://github.com/manali-teke/My-Fitness-Tracker#readme)|
 |Docs: documentation generated, format not ugly  |	3|	Project has well documented readme with dedicated sections for introduction, features, pre-requisites and future scope. - [GH Readme](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/README.md)|
 |Docs: what- point descriptions of each class/function (in isolation) |	3|	All features are clearly explained - [GH Readme](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/README.md)|
 |Docs: how - for common use cases X,Y,Z mini-tutorials showing worked examples on how to do X,Y,Z |	3 |	There are mini-tutorials for some commands - [GH Readme](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/README.md)|
 |Docs: why- docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing |	3 | 	Used quotes and video to sell their product - [GH Readme](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/README.md)|
-Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.| 	0 |	 |
+Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.| 	3 |[GH Readme](https://github.com/manali-teke/My-Fitness-Tracker#readme)|
 Use of version control tools| 	3 | 	Effectively leveraged all the functionalities offered by GH - [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
-Use of style checkers|	2 | 	pylintrc, pycodestyle.config style checker files present but workflow has no runs yet [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
-Use of code formatters |	3 |	PycharmStyleSyntax.xml format checker  files present  [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
-Use of syntax checkers.|	2 |	PycharmStyleSyntax.xml format checker files present [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
-Use of code coverage |	2 |	travis.yml and codecoverage badge - [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
-Other automated analysis tools |	 |	 [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
-Test cases exist |	 |	Test cases in test directory - [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main/tests) |
-Test cases are routinely executed |	 |	 - [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main) |
+Use of style checkers|	3 | [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main/.github/workflows)|
+Use of code formatters |	3 |	[GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/.github/workflows/code_formatter.yml)|
+Use of syntax checkers.|	3 |	PycharmStyleSyntax.xml format checker files present [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main/.github/workflows)|
+Use of code coverage |	3 |	Codecoverage badge - [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main) [CodeCov](https://app.codecov.io/gh/manali-teke/My-Fitness-Tracker)|
+Other automated analysis tools |	3 |	 [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
+Test cases exist |	3 |	Test cases in test directory - [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main/tests) |
+Test cases are routinely executed |	3 |	 - [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main) |
 The files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up |	3 | [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/CONTRIBUTING.md) |
-Issues are discussed before they are closed |	1 | 	No discussions seen in issue thread - [GH discussions](https://github.com/manali-teke/My-Fitness-Tracker/issues)| 
-Chat channel: exists | 3 | [Image proof](https://github.com/manali-teke/My-Fitness-Tracker/tree/project3_update_readme/Proj3) |
-Test cases: a large proportion of the issues related to handling failing cases |	0 | 	 [GH discussions](https://github.com/manali-teke/My-Fitness-Tracker/issues)| 
+Issues are discussed before they are closed |	3 | [GH discussions](https://github.com/manali-teke/My-Fitness-Tracker/discussions)| 
+Chat channel: exists | 3 | [Image proof](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/images/chat_channel_proof.jpeg) |
+Test cases: a large proportion of the issues related to handling failing cases |	3 | [GH Issues](https://github.com/manali-teke/My-Fitness-Tracker/issues)| 
 Evidence that the whole team is using the same tools: everyone can get to all tools and files |	3 |	Commit history of files have different contributors  - [GH](https://github.com/manali-teke/My-Fitness-Tracker/pulse) |
 Evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people) |	 3 | 	Commit history - [GH](https://github.com/manali-teke/My-Fitness-Tracker/pulse)|
-Evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer) |	NA |	-|
-Evidence that the members of the team are working across multiple places in the code base |	2 | 	Commits on main branch - [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/pulse) |
+Evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer) |	3 | All commits pass checks proves code is run and tested before pushing. [GH](https://github.com/manali-teke/My-Fitness-Tracker/pulse)|
+Evidence that the members of the team are working across multiple places in the code base |	3 | 	Commits on main branch - [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/pulse) |
 Short release cycles |	3 | 	version release history - [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker) |
 Does your website and documentation provide a clear, high-level overview of your software? |	Yes |	[GH Readme](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/README.md)|
 Does your website and documentation clearly describe the type of user who should use your software? |	Yes |	
@@ -95,7 +95,7 @@ Do contributors keep the copyright/IP of their contributions?|	Yes |
 Does your website and documentation clearly state the copyright owners of your software and documentation? |	Yes |	
 Does each of your source code files include a copyright statement? |	No |	
 Does your website and documentation clearly state the licence of your software? |	Yes |	
-Is your software released under an open source licence? |	Yes |	MIT License
+Is your software released under an open source licence? |	Yes |	[MIT License](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/LICENSE.txt) |
 Is your software released under an OSI-approved open-source licence? |	Yes |	
 Does each of your source code files include a licence header? |	No |	
 Do you have a recommended citation for your software?* |	Yes |
