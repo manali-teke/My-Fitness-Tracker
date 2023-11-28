@@ -22,3 +22,6 @@ Use of style checkers|	2 | 	pylintrc, pycodestyle.config style checker files pre
 Use of code formatters |	2 |	PycharmStyleSyntax.xml format checker  files present  [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
 Use of syntax checkers.|	2 |	PycharmStyleSyntax.xml format checker files present [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
 Use of code coverage |	2 |	travis.yml and codecoverage badge - [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
+Other automated analysis tools |	 |	 [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main)|
+Test cases exist |	 |	Test cases in test directory - [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main) |
+Test cases are routinely executed |	 |	 - [GH repo](https://github.com/manali-teke/My-Fitness-Tracker/tree/main) |
