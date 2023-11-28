@@ -48,3 +48,6 @@ Does your documentation include a "quick start" guide, that provides a short ove
 If you provide more extensive documentation, does this provide clear, step-by-step instructions on how to deploy and use your software? |	Yes |	
 Do you provide a comprehensive guide to all your software’s commands, functions and options? |	Yes |	
 Do you provide troubleshooting information that describes the symptoms and step-by-step solutions for problems and error messages? |	Yes | 	
+If your software can be used as a library, package or service by other software, do you provide comprehensive API documentation? |	NA |	
+Do you store your documentation under revision control with your source code? |	Yes |	
+Does your software describe how a user can get help with using your software? |	Yes | 	
