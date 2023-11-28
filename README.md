@@ -156,8 +156,11 @@ Link to the implementation video of the BurnOut application:
  ## Graphs for weight data analysis
  ![Graphs for weight data analysis](images/weight_analysis.jpeg)
 
- ## Graphs for weight data analysis
+ ## Save User Wellness Data
  ![Save User Wellness Data](images/wellness_data.jpeg)
+
+ ## Display Wellness Summary
+ ![Display Wellness Summary](images/wellness_summary.jpeg)
 
  # Steps for execution
  
