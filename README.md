@@ -1,4 +1,5 @@
-# Link to demo/walkthrough video:
+# CSC510 Group 20 : Project 3
+Demo Video and Rubrics in Proj3 folder [Link](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/Proj3/README.md)
 
 <br>
 <br>
@@ -15,15 +16,6 @@
 ![github workflow](https://github.com/manali-teke/My-Fitness-Tracker/actions/workflows/syntax_checker.yml/badge.svg)
 [![codecov](https://codecov.io/gh/manali-teke/My-Fitness-Tracker/graph/badge.svg?token=4PB47077LN)](https://codecov.io/gh/manali-teke/My-Fitness-Tracker)
 <!--Badges-->
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/fork" target="blank">
-<img src="https://img.shields.io/github/forks/chaithanyaMarripati/calorieApp_server?style=flat-square" alt="calorieApp_server forks"/>
-</a>
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/stargazers" target="blank">
-<img src="https://img.shields.io/github/stars/chaithanyaMarripati/calorieApp_server?style=flat-square" alt="calorieApp_server stars"/>
-</a>
-<a href="https://github.com/chaithanyaMarripati/calorieApp_server/issues" target="blank">
-<img src="https://img.shields.io/github/issues/chaithanyaMarripati/calorieApp_server?style=flat-square" alt="calorieApp_server issues"/>
-</a>
 <a href="https://github.com/manali-teke/My-Fitness-Tracker/issues" target="blank" alt="issues closed">
 <img src="https://img.shields.io/github/issues-closed/manali-teke/My-Fitness-Tracker" alt="calorieApp_server issues closed"/>
 </a>
@@ -54,10 +46,10 @@
 
 My Fitness Tracker is a user-friendly programme that tracks the number of calories burned and gained each day. Setting objectives like weight growth or decrease might be facilitated by it. By inputting their height, weight, goal, and target-weight, users may change their profile. Users may sign up for a variety of fitness-related programmes, including yoga courses and exercise sessions. By extending a friend invitation, users may now stay in touch with their pals and communicate their progress. This article offers a broad overview to help people grasp the project, accept it as open source software, and contribute further features before releasing it onto the public. The document also serves as a reference for the developers while they work on the project and helps them comprehend the code. 
 
+<img src= "https://github.com/manali-teke/My-Fitness-Tracker/blob/main/images/burnout.gif">
 # Table of Contents  
 
 - [Why use MyFitnessTracker?](#why-use-myfitnesstracker)
-- [Implementation](#implementation)
 - [TechStack Used for the Development of Project:](#techstack-used-for-the-development-of-project)
 - [Core Functionalities of the Application:](#core-functionalities)
   - [Register](#register)
@@ -74,20 +66,14 @@ My Fitness Tracker is a user-friendly programme that tracks the number of calori
 - [Contribution](#contribution)
 - [License](#license)
 
-
 # Why use MyFitnessTracker?
  - User can keep a track of their calorie intake.
  - User just needs to input the food they've had, calories get calculated automatically.
- - Displays a record of calories in and calories burnt out day wise in History tab.
+ - Displays a record of calories in and calories burnt out day wise in History tab and pie chart.
  - Helps user to figure out how much to eat/exercise according to their desired goal(weight loss/gain).
  - Users can connect with their friends and keep track of each other's progress
  - Enrollment into numerous yoga and workout sessions.
  - Accessible to everyone and easy to use.
-
-# Implementation
-
-Link to the implementation video of the MyFitnessTracker application:
-
 
 
 # TechStack Used for the Development of Project
@@ -123,14 +109,6 @@ Link to the implementation video of the MyFitnessTracker application:
 
  ## Chatbot
 ![Chatbot](https://github.com/chaithanyaMarripati/calorieApp_server/assets/143281993/aea8179f-b7a1-4977-b409-5635f30d0736)
-
-
-
-
-
-
-
-
 
 
  ## Check History
@@ -212,7 +190,7 @@ Link to the implementation video of the MyFitnessTracker application:
   Link to the repository:
   https://github.com/manali-teke/My-Fitness-Tracker/
   
-  # Enhancements
+  # Whats new in v3.0.0 :
 
    1. Added Graphs to visualise weight
    2. Added Pie charts
@@ -223,8 +201,7 @@ Link to the implementation video of the MyFitnessTracker application:
 
    # Future Scope
    1. Integrating ML model to give out personalised workout suggestions.
-   2. Store user enrollment data in a new collection(new table) in MongoDb
-   3. Implement forgot password feature
+   2. Implement forgot password feature
    4. Implement email authentication
    5. Deploy the project to make it accessible to everyone
    6. Change colours for the previous and next buttons on dashboard
