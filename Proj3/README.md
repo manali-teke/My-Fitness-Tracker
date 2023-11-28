@@ -30,6 +30,10 @@ Issues are discussed before they are closed |	1 | 	No discussions seen in issue 
 Chat channel: exists |	NA |	-|
 Test cases: a large proportion of the issues related to handling failing cases |	0 | 	 [GH discussions](https://github.com/manali-teke/My-Fitness-Tracker/issues)| 
 Evidence that the whole team is using the same tools: everyone can get to all tools and files |	3 |	Commit history of files have different contributors  - [GH](https://github.com/manali-teke/My-Fitness-Tracker/pulse) |
-Evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people) |	 3 | 	Commit history - [GH]([https://github.com/SEProjGrp5/ScheduleBot](https://github.com/manali-teke/My-Fitness-Tracker/pulse)) |
+Evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people) |	 3 | 	Commit history - [GH](https://github.com/manali-teke/My-Fitness-Tracker/pulse)|
 Evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer) |	NA |	-|
-Evidence that the members of the team are working across multiple places in the code base |	2 | 	Commits on main branch - [GH Repo]([https://github.com/SEProjGrp5/ScheduleBot](https://github.com/manali-teke/My-Fitness-Tracker/pulse)https://github.com/manali-teke/My-Fitness-Tracker/pulse) |
+Evidence that the members of the team are working across multiple places in the code base |	2 | 	Commits on main branch - [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker/pulse) |
+Short release cycles |	3 | 	version release history - [GH Repo](https://github.com/manali-teke/My-Fitness-Tracker) |
+Does your website and documentation provide a clear, high-level overview of your software? |	Yes |	[GH Readme](https://github.com/manali-teke/My-Fitness-Tracker/blob/main/README.md)|
+Does your website and documentation clearly describe the type of user who should use your software? |	Yes |	
+Do you publish case studies to show how your software has been used by yourself and others? |	No |
