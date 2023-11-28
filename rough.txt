@@ -1,6 +1,0 @@
-ML 
-
-recommend exercise
-
-inputs:- Gender, Age, Acutal_weight, Target_weight, Goal, Time_frame (in days), 
-         workout_experience, activity_level, 
