@@ -1,5 +1,5 @@
 # Link to demo/walkthrough video:
-(https://youtu.be/juWO0pcZXzk)
+
 <br>
 <br>
 
@@ -14,7 +14,7 @@
 ![github workflow](https://github.com/manali-teke/My-Fitness-Tracker/actions/workflows/unit_test.yml/badge.svg)
 ![github workflow](https://github.com/manali-teke/My-Fitness-Tracker/actions/workflows/style_checker.yml/badge.svg)
 ![github workflow](https://github.com/manali-teke/My-Fitness-Tracker/actions/workflows/syntax_checker.yml/badge.svg)
-[![codecov](https://codecov.io/gh/chaithanyaMarripati/calorieApp_server/branch/main/graph/badge.svg?token=IQW5PLLE22)](https://codecov.io/gh/deekay2310/calorieApp_server)
+[![codecov](https://codecov.io/gh/manali-teke/My-Fitness-Tracker/graph/badge.svg?token=4PB47077LN)](https://codecov.io/gh/manali-teke/My-Fitness-Tracker)
 <!--Badges-->
 <a href="https://github.com/chaithanyaMarripati/calorieApp_server/fork" target="blank">
 <img src="https://img.shields.io/github/forks/chaithanyaMarripati/calorieApp_server?style=flat-square" alt="calorieApp_server forks"/>
